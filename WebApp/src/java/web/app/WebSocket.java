@@ -36,6 +36,8 @@ public class WebSocket {
     @OnError
     public void onError(Throwable t) {
     }
-
+    public static void main(String[] args){
+        System.out.print("Hello");
+    }
     
 }
