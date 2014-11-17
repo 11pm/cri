@@ -16,4 +16,16 @@ websocket.onopen = function(response){
 	console.log(response)
 };
 
-console.log(websocket)
+websocket.onmessage = function(response){
+	console.log(response)
+};
+
+
+var webClient = {
+	sendJson: function(json){
+		console.log('sending: ' + json)
+		websocket.send(json);
+	},
+
+
+};
