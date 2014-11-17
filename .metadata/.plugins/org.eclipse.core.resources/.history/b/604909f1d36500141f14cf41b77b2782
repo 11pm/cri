@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: jesse
+Build-Jdk: 1.7.0_65
+Main-Class: org.eclipse.jetty.start.Main
+Implementation-Vendor: Eclipse.org - Jetty
+Implementation-Version: 9.2.4.v20141103
+url: http://www.eclipse.org/jetty
+
