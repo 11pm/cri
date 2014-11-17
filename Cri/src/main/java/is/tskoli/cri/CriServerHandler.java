@@ -28,8 +28,9 @@ public class CriServerHandler {
         return "Ayy LMAO!";
     }
     @OnOpen
-    public String onOpen () {
-        return "ayy lmao!";
+    public int onOpen (Session peer) {
+        peers.add(peer);
+        return peers.size();
     }
 
     @OnClose

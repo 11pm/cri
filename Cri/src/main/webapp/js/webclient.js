@@ -12,4 +12,8 @@ websocket.onerror = function(response){
     console.log(response);
 };
 
+websocket.onopen = function(response){
+	console.log(response)
+};
+
 console.log(websocket)
