@@ -31,7 +31,8 @@ var cri = {
 		
 
 		webClient.send({
-			login: {
+			type: "login",
+			data: {
 				username: username,
 				password: password
 			}
@@ -55,21 +56,18 @@ var cri = {
 		});
 
 	},
+
 	sendMessage: function(text){
 		webClient.send({
 			message: text
-		}, function(){
-
-			console.log('sent to server')
+		}, function(response){
+			var data = JSON.parse(response.data);
+			$('.view').html(data.message);
 		});
 	}
 };
 
 $(document).ready(cri.init);
-
-$('.send').on('click', function(e){
-	cri.sendMessage($('.test').val());
-});
 
 //Login submited
 $('body').on('submit', '.loginForm', cri.login);

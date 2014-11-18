@@ -17,9 +17,7 @@ websocket.onopen = function(response){
 	console.log(response)
 };
 
-websocket.onmessage = function(response){
-	wsMessage = response;
-};
+
 
 
 var webClient = {
@@ -27,7 +25,9 @@ var webClient = {
     	this.waitForConnection(function () {
         	websocket.send(JSON.stringify(message));
 	        if (typeof callback !== 'undefined') {
-	          callback(wsMessage);
+		        websocket.onmessage = function(response){
+		        	callback(response);
+				};
 	        }
 	    }, 1000);
 	},

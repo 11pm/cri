@@ -14,7 +14,7 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-
+import javax.json.JsonObject;
 /**
  *
  * @author alexander
@@ -24,8 +24,8 @@ public class CriServerHandler{
     private static Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
 
     @OnMessage
-    public String onMessage(String message) {
-        return message;
+    public String onMessage(String fromClient) {
+       
         //return new JsonHelper(message).toString();
     }
     @OnOpen
