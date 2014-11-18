@@ -12,6 +12,12 @@ $(document).ready(function(){
 				this.userId = local_user;
 			}
 
+			webClient.sendJson({
+				login: {
+					username: 'ayy',
+					password: 'lmao'
+				}
+			});
 			
 			if(this.isAuth()){
 				console.log('logged in')

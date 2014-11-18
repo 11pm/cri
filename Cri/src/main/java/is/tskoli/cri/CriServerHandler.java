@@ -25,7 +25,7 @@ public class CriServerHandler {
 
     @OnMessage
     public String onMessage(String message) {
-        return "Ayy LMAO!";
+        return message;
     }
     @OnOpen
     public int onOpen (Session peer) {

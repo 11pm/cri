@@ -23,7 +23,7 @@ websocket.onmessage = function(response){
 
 var webClient = {
 	sendJson: function(json){
-		console.log('sending: ' + json)
+		console.log('sending: ' + JSON.stringify(json)); 
 		websocket.send(json);
 	},
 
