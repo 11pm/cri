@@ -20,12 +20,13 @@ import javax.websocket.server.ServerEndpoint;
  * @author alexander
  */
 @ServerEndpoint("/server")
-public class CriServerHandler {
+public class CriServerHandler{
     private static Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
 
     @OnMessage
     public String onMessage(String message) {
         return message;
+        //return new JsonHelper(message).toString();
     }
     @OnOpen
     public int onOpen (Session peer) {

@@ -7,7 +7,8 @@
 var wsUri = "ws://" + document.location.host + document.location.pathname + "server";
 
 var websocket = new WebSocket(wsUri);
-
+var data;
+var jsontest = {message: 'Hello'}
 websocket.onerror = function(response){
     console.log(response);
 };
@@ -17,15 +18,30 @@ websocket.onopen = function(response){
 };
 
 websocket.onmessage = function(response){
-	console.log(response)
+	var data = JSON.parse(response.data);
+	$('.user').text(data.message);
+
 };
 
 
 var webClient = {
-	sendJson: function(json){
-		console.log('sending: ' + JSON.stringify(json)); 
-		websocket.send(json);
+	send: function (message, callback) {
+    	this.waitForConnection(function () {
+        	websocket.send(JSON.stringify(message));
+	        if (typeof callback !== 'undefined') {
+	          callback();
+	        }
+	    }, 1000);
 	},
 
-
+	waitForConnection: function (callback, interval) {
+	    if (websocket.readyState === 1) {
+	        callback();
+	    } else {
+	        var that = this;
+	        setTimeout(function () {
+	            that.waitForConnection(callback);
+	        }, interval);
+	    }
+	}
 };

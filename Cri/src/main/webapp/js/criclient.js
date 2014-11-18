@@ -1,48 +1,51 @@
-$(document).ready(function(){
-	var cri = {
-		templateFolder: 'templates/',
-		//user not logged in
-		userId: -1,
+var cri = {
+	templateFolder: 'templates/',
+	//user not logged in
+	userId: -1,
 
-		init: function(){
+	init: function(){
 
-			var local_user = localStorage.getItem('id');
-			//User found
-			if(local_user != null){
-				this.userId = local_user;
-			}
-
-			webClient.sendJson({
-				login: {
-					username: 'ayy',
-					password: 'lmao'
-				}
-			});
+		var local_user = localStorage.getItem('id');
+		//User found
+		if(local_user != null){
+			this.userId = local_user;
+		}
 			
-			if(this.isAuth()){
-				console.log('logged in')
-			}
-			else{
-				console.log('not logged in')
-			}
-		},
+		if(cri.isAuth()){
+			console.log('logged in')
+		}
+		else{
+			console.log('not logged in')
+		}
+	},
 
-		isAuth: function(){
-			return this.userId > 0;
-		},
+	isAuth: function(){
+		return this.userId > 0;
+	},
 
-		renderTemplate: function(name){
+	renderTemplate: function(name){
 
-			$.ajax({
-				url: cri.templateFolder + name,
-				type: "GET",
-				success: function(html){
-					$('.view').html(html);
-				} 
-			});
+		$.ajax({
+			url: cri.templateFolder + name,
+			type: "GET",
+			success: function(html){
+				$('.view').html(html);
+			} 
+		});
 
-		},
-	};
+	},
+	sendMessage: function(text){
+		webClient.send({
+			message: text
+		}, function(){
 
-	cri.init();
+			console.log('sent to server')
+		});
+	}
+};
+
+$(document).ready(cri.init);
+
+$('.send').on('click', function(e){
+	cri.sendMessage($('.test').val());
 });

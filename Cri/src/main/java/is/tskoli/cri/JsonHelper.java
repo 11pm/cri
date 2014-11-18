@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package is.tskoli.cri;
+import java.io.StringReader;
 import java.io.StringWriter;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -12,15 +13,19 @@ import javax.json.JsonObject;
  *
  * @author alexander
  */
-public class Figure {
+public class JsonHelper {
     private JsonObject json;
     
+    JsonHelper(String _json){
+        this.setJson(_json);
+    }
+
     public JsonObject getJson(){
         return json;
     }
     
-    public void setJson(JsonObject newJson){
-        this.json = newJson;
+    public void setJson(String newJson){
+        this.json = Json.createReader(new StringReader(newJson)).readObject();
     }
     
     @Override
