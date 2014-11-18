@@ -15,7 +15,7 @@ var cri = {
 			console.log('logged in')
 		}
 		else{
-			console.log('not logged in')
+			cri.renderTemplate('login');
 		}
 	},
 
@@ -23,10 +23,20 @@ var cri = {
 		return this.userId > 0;
 	},
 
+	login: function(e){
+		e.preventDeafult();
+		console.log($(this))
+		return false;
+	},
+
 	renderTemplate: function(name){
 
+		var templateName = function(name){
+			return cri.templateFolder + name + '.handlebars';
+		}
+
 		$.ajax({
-			url: cri.templateFolder + name,
+			url: templateName(name),
 			type: "GET",
 			success: function(html){
 				$('.view').html(html);
@@ -49,3 +59,6 @@ $(document).ready(cri.init);
 $('.send').on('click', function(e){
 	cri.sendMessage($('.test').val());
 });
+
+//Login submited
+$('body').on('submit', '.loginForm', cri.login);
