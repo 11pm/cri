@@ -7,8 +7,8 @@
 var wsUri = "ws://" + document.location.host + document.location.pathname + "server";
 
 var websocket = new WebSocket(wsUri);
-var data;
-var jsontest = {message: 'Hello'}
+var wsMessage;
+
 websocket.onerror = function(response){
     console.log(response);
 };
@@ -18,9 +18,7 @@ websocket.onopen = function(response){
 };
 
 websocket.onmessage = function(response){
-	var data = JSON.parse(response.data);
-	$('.user').text(data.message);
-
+	wsMessage = response;
 };
 
 
@@ -29,7 +27,7 @@ var webClient = {
     	this.waitForConnection(function () {
         	websocket.send(JSON.stringify(message));
 	        if (typeof callback !== 'undefined') {
-	          callback();
+	          callback(wsMessage);
 	        }
 	    }, 1000);
 	},

@@ -24,9 +24,20 @@ var cri = {
 	},
 
 	login: function(e){
-		e.preventDeafult();
-		console.log($(this))
-		return false;
+		e.preventDefault();
+		var that = $(this);
+		var username = that.find('.username').val();
+		var password = that.find('.password').val();
+		
+
+		webClient.send({
+			login: {
+				username: username,
+				password: password
+			}
+		}, function(response){
+			console.log(response)
+		});
 	},
 
 	renderTemplate: function(name){
