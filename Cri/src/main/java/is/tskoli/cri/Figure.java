@@ -13,19 +13,19 @@ import javax.json.JsonObject;
  *
  * @author alexander
  */
-public class JsonHelper {
+public class Figure {
     private JsonObject json;
     
-    JsonHelper(String _json){
-        this.setJson(_json);
+    public Figure(JsonObject s){
+        this.json = s;
     }
-
+    
     public JsonObject getJson(){
         return json;
     }
     
-    public void setJson(String newJson){
-        this.json = Json.createReader(new StringReader(newJson)).readObject();
+    public void setJson(JsonObject newJson){
+        this.json = newJson;
     }
     
     @Override

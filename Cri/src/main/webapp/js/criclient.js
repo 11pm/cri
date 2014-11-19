@@ -12,7 +12,7 @@ var cri = {
 		}
 			
 		if(cri.isAuth()){
-			console.log('logged in')
+			cri.renderTemplate('main');
 		}
 		else{
 			cri.renderTemplate('login');
@@ -20,7 +20,8 @@ var cri = {
 	},
 
 	isAuth: function(){
-		return this.userId > 0;
+		return 1;
+		//return this.userId > 0;
 	},
 
 	login: function(e){
