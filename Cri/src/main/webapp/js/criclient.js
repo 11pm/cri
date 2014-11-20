@@ -20,8 +20,7 @@ var cri = {
 	},
 
 	isAuth: function(){
-		return 1;
-		//return this.userId > 0;
+		return this.userId > 0;
 	},
 
 	login: function(e){

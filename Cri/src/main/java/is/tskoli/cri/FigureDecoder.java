@@ -8,6 +8,7 @@ package is.tskoli.cri;
 import java.io.StringReader;
 import javax.json.Json;
 import javax.json.JsonObject;
+import javax.json.JsonException;
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
@@ -26,7 +27,15 @@ public class FigureDecoder implements Decoder.Text<Figure>{
 
     @Override
     public boolean willDecode(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try{
+            Json.createReader(new StringReader(string)).readObject();
+            return true;
+        }
+        catch(JsonException ex){
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     @Override
