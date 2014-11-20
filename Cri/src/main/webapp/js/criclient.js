@@ -10,13 +10,17 @@ var cri = {
 		if(local_user != null){
 			this.userId = local_user;
 		}
-			
-		if(cri.isAuth()){
-			cri.renderTemplate('main');
-		}
-		else{
-			cri.renderTemplate('login');
-		}
+
+		userId = 1;
+		
+		cri.renderTemplate('main');
+		cri.renderTemplate('friendslist');
+		// if(cri.isAuth()){
+		// 	cri.renderTemplate('main');
+		// }
+		// else{
+		// 	cri.renderTemplate('login');
+		// }
 	},
 
 	isAuth: function(){
@@ -51,7 +55,7 @@ var cri = {
 			url: templateName(name),
 			type: "GET",
 			success: function(html){
-				$('.view').html(html);
+				$('.'+name).html(html);
 			} 
 		});
 
