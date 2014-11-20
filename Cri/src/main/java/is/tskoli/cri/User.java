@@ -9,16 +9,19 @@ package is.tskoli.cri;
  *
  * @author alexander
  */
-public class User {
+public class User extends Database{
     
-    public User(){
+    public String username;
+    public String password;
     
+    public User(String username, String password) throws Exception{
+        super.connect();
+        this.username = username;
+        this.password = password;
+        System.out.println("Hello");
     }
-    public Boolean login(String username, String password){
-        
-        if(username.equals("ayy") && password.equals("lmao")){
-            return true;
-        }  
-        return false;
+    
+    public Boolean login() throws Exception{
+        return super.login(this);
     }
 }

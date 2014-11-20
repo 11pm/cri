@@ -25,9 +25,9 @@ import org.json.*;
 @ServerEndpoint("/server")
 public class CriServerHandler{
     private static Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
-
+    
     @OnMessage
-    public String handleClient(String jsonFromClient) throws IOException, JSONException {
+    public String handleClient(String jsonFromClient) throws IOException, JSONException, Exception {
         
         JSONObject obj = new JSONObject(jsonFromClient);
 
@@ -36,19 +36,18 @@ public class CriServerHandler{
             //user request server to log him in
             case "login":
                 
-                User u = new User();
-                
                 JSONObject data = obj.getJSONObject("data");
                 String username = (String) data.get("username");
                 String password = (String) data.get("password");
                 
-                if(u.login(username, password)){
-                    returns = "yay";
+                User u = new User(username, password);
+                
+                if(u.login(u)){
+                    returns = "works";
                 }
                 else{
-                    returns = "nay";
+                    returns = "nope";
                 }
-                
                 break;
         }
         return returns;
@@ -69,5 +68,9 @@ public class CriServerHandler{
     @OnError
     public void onError(Throwable t) {
         
+    }
+    
+    public static void main(String[] args){
+        System.out.println("Hello world");
     }
 }
