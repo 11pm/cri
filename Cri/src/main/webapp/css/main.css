@@ -27,9 +27,9 @@ body {
 	display: inline-block;
 }
 
-.main {
+/*.main {
 	height: 100%;
-}
+}*/
 
 .profile {
 	background-color: #282C35;
@@ -96,18 +96,18 @@ body {
 	height: 100%;
 }
 
-::-webkit-scrollbar {
+.list ::-webkit-scrollbar {
     width: 12px;
     margin-right: 1px;
 }
  
-::-webkit-scrollbar-track {
+.list ::-webkit-scrollbar-track {
     /*-webkit-box-shadow: inset 0 0 6px rgb(0,187,142); */
     background-color: #33363F;
     /*border-radius: 10px;*/
 }
  
-::-webkit-scrollbar-thumb {
+.list ::-webkit-scrollbar-thumb {
     /*border-radius: 10px;*/
     background-color: #00BB8E;
     /*background-color: #009F79;*/

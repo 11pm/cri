@@ -11,16 +11,16 @@ var cri = {
 			this.userId = local_user;
 		}
 
-		userId = 1;
+		// userId = 1;
 		
-		cri.renderTemplate('main');
-		cri.renderTemplate('friendslist');
-		// if(cri.isAuth()){
-		// 	cri.renderTemplate('main');
-		// }
-		// else{
-		// 	cri.renderTemplate('login');
-		// }
+		// cri.renderTemplate('main');
+		// cri.renderTemplate('friendslist');
+		if(cri.isAuth()){
+			cri.renderTemplate('main');
+		}
+		else{
+			cri.renderTemplate('login');
+		}
 	},
 
 	isAuth: function(){
