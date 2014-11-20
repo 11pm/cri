@@ -39,19 +39,24 @@ public class CriServerHandler{
                 JSONObject data = obj.getJSONObject("data");
                 String username = (String) data.get("username");
                 String password = (String) data.get("password");
-                
+                //create User object
                 User u = new User(username, password);
                 
-                if(u.login(u)){
-                    returns = "works";
+                //check if cretentials are correct
+                if(u.login()){
+                    
+                    return u.data.get("id");
                 }
                 else{
-                    returns = "nope";
+                    return "nope";
                 }
-                break;
+            
+            case "test":
+                return "test";
+                
         }
-        return returns;
-        //return "You reached this part, something bad happended";
+        
+        return "You reached this part, something bad happended";
     }
     
     @OnOpen
