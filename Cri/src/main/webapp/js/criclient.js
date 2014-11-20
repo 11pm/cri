@@ -4,15 +4,16 @@ var cri = {
 	userId: -1,
 
 	init: function(){
-
 		var local_user = localStorage.getItem('id');
+		console.log(local_user)
 		//User found
-		if(local_user != null){
-			this.userId = local_user;
+		if(local_user){
+
+			cri.userId = local_user;
 		}
 
 		// userId = 1;
-		
+		console.log(cri.userId)
 		// cri.renderTemplate('main');
 		// cri.renderTemplate('friendslist');
 		if(cri.isAuth()){
@@ -41,7 +42,11 @@ var cri = {
 				password: password
 			}
 		}, function(response){
-			console.log(response)
+			//worked MAn
+			if(response.data != "nope"){
+				localStorage.setItem("id", response.data);
+				cri.init();
+			}
 		});
 	},
 
