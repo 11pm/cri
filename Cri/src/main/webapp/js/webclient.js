@@ -17,9 +17,6 @@ websocket.onopen = function(response){
 	console.log(response)
 };
 
-
-
-
 var webClient = {
 	send: function (message, callback) {
 		console.log('sending to server...')

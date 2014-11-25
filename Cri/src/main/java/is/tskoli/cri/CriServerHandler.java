@@ -6,9 +6,7 @@
 package is.tskoli.cri;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -25,38 +23,43 @@ import org.json.*;
 @ServerEndpoint("/server")
 public class CriServerHandler{
     private static Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
+    User clientUser;
     
     @OnMessage
-    public String handleClient(String jsonFromClient) throws IOException, JSONException, Exception {
-        
-        JSONObject obj = new JSONObject(jsonFromClient);
+    public String handleClient(String jsonFromClient)  {
+        try{
+            JSONObject obj = new JSONObject(jsonFromClient);
 
-        String returns = null;
-        switch(obj.getString("type")){
-            //user request server to log him in
-            case "login":
-                
-                JSONObject data = obj.getJSONObject("data");
-                String username = (String) data.get("username");
-                String password = (String) data.get("password");
-                //create User object
-                User u = new User(username, password);
-                
-                //check if cretentials are correct
-                if(u.login()){
-                    
-                    return u.data.get("id");
-                }
-                else{
-                    return "nope";
-                }
+            String returns = null;
+            switch(obj.getString("type")){
+                //user request server to log him in
+                case "login":
+
+                    JSONObject data = obj.getJSONObject("data");
+                    String username = (String) data.get("username");
+                    String password = (String) data.get("password");
+                    //create User object
+                    clientUser = new User(username, password);
+
+                    //check if cretentials are correct
+                    if(clientUser.login()){
+
+                        return clientUser.data.get("id");
+                    }
+                    else{
+                        return "nope";
+                    }
+
+                case "test":
+                    return "test";
+
+            }
             
-            case "test":
-                return "test";
-                
         }
-        
-        return "You reached this part, something bad happended";
+        catch(Exception e){
+            return e.getLocalizedMessage();
+        }       
+        return "You reached thistest part, something bad happended";
     }
     
     @OnOpen

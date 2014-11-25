@@ -16,11 +16,16 @@ public class User extends Database{
     
     public Map<String, String> data = new HashMap<String, String>();
     
-    public User(String username, String password) throws Exception{
-        //connect to database
-        super.connect();
-        this.username = username;
-        this.password = password;
+    public User(String username, String password){
+        try{
+            //connect to database
+            super.connect();
+            this.username = username;
+            this.password = password;
+        }
+        catch(Exception e){
+            e.getStackTrace();
+        }
     }
     
     public Boolean login() throws Exception{
@@ -31,4 +36,8 @@ public class User extends Database{
         }
         return false;
     }
+    
+   /*public List<Friend> getFriends() throws Exception{
+       return super.userFriends(this);
+   }*/
 }

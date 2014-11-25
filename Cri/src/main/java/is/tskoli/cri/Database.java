@@ -61,4 +61,23 @@ class Database{
         
         return temp;
     }
+    /* public List<Friend> userFriends(User u) throws Exception{
+        List<Friend> templist = new ArrayList<>();
+        
+        String query = "SELECT u2.id, u2.username FROM friendlist"
+                + "INNER JOIN users u1 ON friendlist.userID = u1.id"
+                + "INNER JOIN users u2 ON friendlist.friendID = u2.id"
+                + "WHERE u1.username = ?";
+        
+        prepSt = con.prepareStatement(query);
+        prepSt.setString(1, u.username);
+        rs = prepSt.executeQuery();
+        
+        //Go through all friends
+        while(rs.next()){
+            templist.add(new Friend(rs.getString("id"), rs.getString("username")));
+        }
+        
+        return templist;
+    } */
 }

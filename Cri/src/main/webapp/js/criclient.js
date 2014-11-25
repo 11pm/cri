@@ -5,19 +5,16 @@ var cri = {
 
 	init: function(){
 		var local_user = localStorage.getItem('id');
-		console.log(local_user)
 		//User found
 		if(local_user){
-
 			cri.userId = local_user;
 		}
 
-		// userId = 1;
-		console.log(cri.userId)
-		// cri.renderTemplate('main');
-		// cri.renderTemplate('friendslist');
 		if(cri.isAuth()){
 			cri.renderTemplate('main');
+			webClient.send({type: "friends"}, function(response){
+				console.log(response)
+			});
 		}
 		else{
 			cri.renderTemplate('login');
