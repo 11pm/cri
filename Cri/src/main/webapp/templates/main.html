@@ -26,35 +26,12 @@
 
       <div class="list">
         <ul class="side-nav">
-          <li class="active">Halldór Smári</li>
-          <li>Alexander Leó</li>
-          <li>Alexander Hilmar</li>
-          <li>Gunnar Helgi</li>
-          <li>Guðjón Heimir</li>
-          <li>Alexander Leó</li>
-          <li>Alexander Hilmar</li>
-          <li>Gunnar Helgi</li>
-          <li>Guðjón Heimir</li>
-          <li>Alexander Leó</li>
-          <li>Alexander Hilmar</li>
-          <li>Gunnar Helgi</li>
-          <li>Guðjón Heimir</li>
-          <li>Alexander Leó</li>
-          <li>Alexander Hilmar</li>
-          <li>Gunnar Helgi</li>
-          <li>Guðjón Heimir</li>
-          <li>Alexander Leó</li>
-          <li>Alexander Hilmar</li>
-          <li>Gunnar Helgi</li>
-          <li>Guðjón Heimir</li>
-          <li>Alexander Leó</li>
-          <li>Alexander Hilmar</li>
-          <li>Gunnar Helgi</li>
-          <li>Guðjón Heimir</li>
-          <li>Alexander Leó</li>
-          <li>Alexander Hilmar</li>
-          <li>Gunnar Helgi</li>
-          <li>Guðjón Heimir</li>
+          {{#each this.friends}}
+            <li
+            data-id="{{this.id}}"
+            data-username="{{this.username}}"
+            >{{this.username}}</li>
+          {{/each}}
         </ul> 
       </div>
       
