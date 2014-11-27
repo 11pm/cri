@@ -5,6 +5,8 @@
  */
 package is.tskoli.cri;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.websocket.Session;
 /**
  *
@@ -34,13 +36,17 @@ public class User extends Database{
         }
     }
     
-    public Boolean login() throws Exception{
-        if(super.login(this)){
-            //if login worked, load new data
-            this.data = super.userData(this);
-            //load the users friends
-            this.friends = super.userFriends(this);
-            return true;
+    public Boolean login(){
+        try {
+            if(super.login(this)){
+                //if login worked, load new data
+                this.data = super.userData(this);
+                //load the users friends
+                this.friends = super.userFriends(this);
+                return true;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }

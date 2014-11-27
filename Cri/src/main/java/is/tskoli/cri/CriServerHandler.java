@@ -15,7 +15,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.json.*;
-//import org.json.*;
+import java.util.logging.*;
 /**
  *
  * @author alexander
@@ -23,41 +23,58 @@ import org.json.*;
 @ServerEndpoint("/server")
 public class CriServerHandler{
     private static Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
-    private static User clientUser;
+    private User clientUser;
+    Logger logger = Logger.getAnonymousLogger();
+    
     
     @OnMessage
-    public String handleClient(String jsonFromClient, Session s) throws JSONException, Exception  {
-     
-        JSONObject obj = new JSONObject(jsonFromClient);
+    public String handleClient(String jsonFromClient, Session s) {
+        
+        JSONObject obj = null;
+        try {
+            obj = new JSONObject(jsonFromClient);
+        } catch (JSONException ex) {
+            Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+        try {
             switch(obj.getString("type")){
                 //user request server to log him in
                 case "login":
 
                     JSONObject data = obj.getJSONObject("data");
-                    String username = (String) data.get("username");
+                    String username = (String) data.get("usernme");
                     String password = (String) data.get("password");
                     //create User object
                     clientUser = new User(username, password, s);
                     
                     
-                    //check if cretentials are correct
-                    if(clientUser.login()){
-                        //return user details, user friends
-                        List<Map<String, String>> friends = clientUser.friends;
-                        Map<String, String> details = clientUser.data;
-                        return new JSONObject().put("success", true).put("details", details).put("friends", friends).toString();
-                        
+            
+                    try {
+                        //check if cretentials are correct
+                        if(clientUser.login()){
+                            //return user details, user friends
+                            List<Map<String, String>> friends = clientUser.friends;
+                            Map<String, String> details = clientUser.data;
+                            return new JSONObject().put("success", true).put("details", details).put("friends", friends).toString();
+
+                        }
+                        else{
+                            //send {"success": false} to client
+                            return new JSONObject().put("success", false).toString();
+                        }
+                    } catch (Exception ex) {
+                        Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    else{
-                        //send {"success": false} to client
-                        return new JSONObject().put("success", false).toString();
-                    }
+            
                 case "message":
                     return clientUser.test();
                     
                     
             }
+        } catch (JSONException ex) {
+            Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return "le 500";    
         //return obj.getString("type");     
         
@@ -75,8 +92,8 @@ public class CriServerHandler{
     }
 
     @OnError
-    public void onError(Throwable t) {
-        
+    public String onError(Throwable t) {
+        return t.getMessage();
     }
     
     public static void main(String[] args){

@@ -40,6 +40,7 @@ var cri = {
 		
 		webClient.send({type: "login", data: { username: username, password: password }}, function(response){
 			//worked MA
+			console.log(response)
 			response = JSON.parse(response.data);
 
 			//login worked
