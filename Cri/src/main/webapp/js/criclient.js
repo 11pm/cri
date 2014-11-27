@@ -11,10 +11,10 @@ var cri = {
 	},
 
 	init: function(){
-		var local_user = localStorage.getItem('id');
+		var local_user = JSON.parse(localStorage.getItem("user"));
 		//User found
 		if(local_user){
-			cri.user.id = local_user;
+			cri.user = local_user;
 		}
 
 		if(cri.isAuth()){
@@ -45,7 +45,7 @@ var cri = {
 				cri.user = response.details;
 				cri.user.friends = response.friends;
 
-				localStorage.setItem("id", cri.user.id);
+				localStorage.setItem("user", JSON.stringify(cri.user));
 				cri.init();
 
 			}
