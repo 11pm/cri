@@ -45,7 +45,7 @@ public class CriServerHandler{
                         //return user details, user friends
                         List<Friend> friends = clientUser.friends;
                         Map<String, String> details = clientUser.data;
-                        
+                        return new JSONObject().put("success", true).put("details", details).toString();
                         
                     }
                     else{

@@ -41,7 +41,7 @@ var cri = {
 			var response = JSON.parse(response.data);
 
 
-			console.log(response.success);
+			console.log(response);
 			/*if(response.data != "nope"){
 				localStorage.setItem("id", response.data);
 				cri.init();
