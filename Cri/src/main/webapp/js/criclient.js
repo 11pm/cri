@@ -1,13 +1,8 @@
 var cri = {
 	templateFolder: 'templates/',
-	//user not logged in
 	
-	user: {
-		id: null,
-		username: null,
-		password: null,
-		created_at: null,
-	},
+	//all details about a user	
+	user: {},
 
 	init: function(){
 		var local_user = localStorage.getItem('id');
@@ -34,14 +29,21 @@ var cri = {
 		var that = $(this);
 		var username = that.find('.username').val();
 		var password = that.find('.password').val();
-		console.log(username)
-		console.log(password)
+		
 		webClient.send({type: "login", data: { username: username, password: password }}, function(response){
 			//worked MA
-			var response = JSON.parse(response.data);
+			response = JSON.parse(response.data);
 
+			//login worked
+			if(response.success === true){
 
-			console.log(response);
+				cri.user.details = response.details;
+				cri.user.friends = response.friends;
+
+			}
+			else{
+				console.log("too bad");
+			}
 			/*if(response.data != "nope"){
 				localStorage.setItem("id", response.data);
 				cri.init();
