@@ -43,9 +43,9 @@ public class CriServerHandler{
                     //check if cretentials are correct
                     if(clientUser.login()){
                         //return user details, user friends
-                        List<Friend> friends = clientUser.friends;
+                        List<Map<String, String>> friends = clientUser.friends;
                         Map<String, String> details = clientUser.data;
-                        return new JSONObject().put("success", true).put("details", details).toString();
+                        return new JSONObject().put("success", true).put("details", details).put("friends", friends).toString();
                         
                     }
                     else{

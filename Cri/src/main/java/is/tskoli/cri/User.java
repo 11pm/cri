@@ -16,7 +16,7 @@ public class User extends Database{
     
     public Map<String, String> data = new HashMap<>();
     
-    public List<Friend> friends = new ArrayList<>();
+    public List<Map<String, String>> friends = new ArrayList<>();
     //public String f;
     
     public User(String username, String password){

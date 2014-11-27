@@ -58,8 +58,8 @@ class Database{
         
         return temp;
     }
-    public List<Friend> userFriends(User u) throws Exception{
-        List<Friend> templist = new ArrayList<>();
+    public List<Map<String, String>> userFriends(User u) throws Exception{
+        List<Map<String, String>> templist = new ArrayList<>();
         
         String query = "CALL friends(?)";
         
@@ -69,8 +69,13 @@ class Database{
         
         //go through all records
         while(rs.next()){
-            templist.add(new Friend(rs.getString("id"), rs.getString("username")));
+            Map<String, String> tempMap = new HashMap<>();
+            
+            tempMap.put("id", rs.getString("id"));
+            tempMap.put("username", rs.getString("username"));
+            templist.add(tempMap);
         }
+        
         return templist;
     }
 }
