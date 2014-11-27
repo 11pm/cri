@@ -19,14 +19,15 @@ websocket.onopen = function(response){
 
 var webClient = {
 	send: function (message, callback) {
-		console.log('sending to server...')
+		
     	this.waitForConnection(function () {
+        	console.log('sending to server...')
         	websocket.send(JSON.stringify(message));
-	        if (typeof callback !== 'undefined') {
-		        websocket.onmessage = function(response){
-		        	callback(response);
-				};
-	        }
+	        
+		    websocket.onmessage = function(response){
+		       	callback(response);
+			};
+	        
 	    }, 1000);
 	},
 

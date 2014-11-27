@@ -1,20 +1,24 @@
 var cri = {
 	templateFolder: 'templates/',
 	//user not logged in
-	userId: -1,
+	
+	user: {
+		id: null,
+		username: null,
+		password: null,
+		created_at: null,
+	},
 
 	init: function(){
 		var local_user = localStorage.getItem('id');
 		//User found
 		if(local_user){
-			cri.userId = local_user;
+			cri.user.id = local_user;
 		}
 
 		if(cri.isAuth()){
 			cri.renderTemplate('main');
-			webClient.send({type: "friends"}, function(response){
-				console.log(response)
-			});
+			console.log("is auth")
 		}
 		else{
 			cri.renderTemplate('login');
@@ -22,7 +26,7 @@ var cri = {
 	},
 
 	isAuth: function(){
-		return this.userId > 0;
+		return this.user.id > 0;
 	},
 
 	login: function(e){
@@ -32,26 +36,21 @@ var cri = {
 		var password = that.find('.password').val();
 		
 
-		webClient.send({
-			type: "login",
-			data: {
-				username: username,
-				password: password
-			}
-		}, function(response){
-			//worked MAn
-			if(response.data != "nope"){
+		webClient.send({type: "login", data: { username: username, password: password }}, function(response){
+			//worked MA
+			console.log(response)
+			/*if(response.data != "nope"){
 				localStorage.setItem("id", response.data);
 				cri.init();
-			}
+			}*/
 		});
 	},
 
 	renderTemplate: function(name){
 
 		var templateName = function(name){
-			return cri.templateFolder + name + '.handlebars';
-		}
+			return cri.templateFolder + name + '.html';
+		};
 
 		$.ajax({
 			url: templateName(name),

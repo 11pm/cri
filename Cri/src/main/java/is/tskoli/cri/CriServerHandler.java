@@ -23,14 +23,13 @@ import org.json.*;
 @ServerEndpoint("/server")
 public class CriServerHandler{
     private static Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
-    User clientUser;
+    private User clientUser;
     
     @OnMessage
-    public String handleClient(String jsonFromClient)  {
-        try{
-            JSONObject obj = new JSONObject(jsonFromClient);
+    public String handleClient(String jsonFromClient) throws JSONException, Exception  {
+     
+        JSONObject obj = new JSONObject(jsonFromClient);
 
-            String returns = null;
             switch(obj.getString("type")){
                 //user request server to log him in
                 case "login":
@@ -40,26 +39,23 @@ public class CriServerHandler{
                     String password = (String) data.get("password");
                     //create User object
                     clientUser = new User(username, password);
-
+                    
                     //check if cretentials are correct
                     if(clientUser.login()){
-
-                        return clientUser.data.get("id");
+                        return "a";
                     }
                     else{
                         return "nope";
                     }
 
-                case "test":
-                    return "test";
+                case "friends":
+                    //return clientUser.username;
+                    //return clientUser.getFriends();
 
-            }
-            
         }
-        catch(Exception e){
-            return e.getLocalizedMessage();
-        }       
-        return "You reached thistest part, something bad happended";
+        return "le 500";    
+               
+        
     }
     
     @OnOpen

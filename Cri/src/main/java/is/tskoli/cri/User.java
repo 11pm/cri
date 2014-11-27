@@ -14,7 +14,9 @@ public class User extends Database{
     public String username;
     public String password;
     
-    public Map<String, String> data = new HashMap<String, String>();
+    public Map<String, String> data = new HashMap<>();
+    
+    public List<Friend> friends = new ArrayList<>();
     
     public User(String username, String password){
         try{
@@ -32,12 +34,14 @@ public class User extends Database{
         if(super.login(this)){
             //if login worked, load new data
             this.data = super.userData(this);
+            this.friends = super.userFriends(this);
             return true;
         }
         return false;
     }
     
-   /*public List<Friend> getFriends() throws Exception{
-       return super.userFriends(this);
-   }*/
+    public List<Friend> getFriends() throws Exception{
+        return super.userFriends(this);
+    }
+    
 }
