@@ -25,12 +25,10 @@ public class CriServerHandler{
     private static Set<Session> allUsers = Collections.synchronizedSet(new HashSet<Session>());
    
     Logger logger = Logger.getAnonymousLogger();
-    
+    User client;
     
     @OnMessage
     public void handleClient(String jsonFromClient, Session s) {
-        //get user from session
-        User clientUser = (User) s.getUserProperties().get("user");
         
         JSONObject obj = null;
         try {
@@ -51,38 +49,39 @@ public class CriServerHandler{
                     //create User object
                     s.getUserProperties().put("user", new User(username, password, s));
                     //get the User obj stored in session
-                    clientUser = (User) s.getUserProperties().get("user");
+                    client = (User) s.getUserProperties().get("user");
                     try {
                         //check if cretentials are correct
-                        if(clientUser.login()){
-                            //return user details, user friends
-                            
+                        if(client.login()){
+                            //return user details, user friends                           
                                     
-                            List<Map<String, String>> friends = clientUser.friends;
-                            Map<String, String> details = clientUser.data;
-                            s.getBasicRemote().sendText("ayy lmao");
+                            List<Map<String, String>> friends = client.friends;
+                            Map<String, String> details = client.data;
+                            s.getBasicRemote().sendText(new JSONObject().put("success", true).put("details", details).put("friends", friends).toString());
                             //return new JSONObject().put("success", true).put("details", details).put("friends", friends).toString();
-
                         }
                         else{
                             //send {"success": false} to client
                             //return new JSONObject().put("success", false).toString();
+                            s.getBasicRemote().sendText(new JSONObject().put("success", false).toString());
                         }
                     } catch (Exception ex) {
                         Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
                     }
-            
+                break;
                 case "message":
-                    //return clientUser.test();
-                    
-                    
+            
+                    try {
+                        client = (User) s.getUserProperties().get("user");
+                        s.getBasicRemote().sendText(client.username);
+                    } catch (IOException ex) {
+                        Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    }                    
+                break;
             }
         } catch (JSONException ex) {
             Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-      
-          
         
     }
     

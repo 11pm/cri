@@ -19,9 +19,6 @@ var cri = {
 
 		if(cri.isAuth()){
 			cri.renderTemplate('main', cri.user);
-			webClient.send({type: "message"}, function(response){
-				console.log(response)
-			})
 		}
 		else{
 			cri.renderTemplate('login');
@@ -98,6 +95,10 @@ var cri = {
 		e.preventDefault();
 
 		var message = $(this).find('.message').val();
+
+		webClient.send({type: "message", data: {content: message}}, function(response){
+			console.log(response);
+		});
 
 		$(".messages .message").append(message);
 
