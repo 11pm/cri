@@ -88,14 +88,17 @@ var cri = {
 
 	},
 
-	sendMessage: function(text){
-		webClient.send({
-			message: text
-		}, function(response){
-			var data = JSON.parse(response.data);
-			$('.view').html(data.message);
-		});
-	}
+	//send the message server
+	sendMessage: function(e){
+		
+		e.preventDefault();
+
+		var message = $(this).find('.message').val();
+
+		$(".messages .message").append(message);
+
+	},
+
 };
 
 $(document).ready(cri.init);
@@ -104,3 +107,5 @@ $(document).ready(cri.init);
 $('body').on('submit', '.loginForm', cri.login);
 
 $('body').on('click', '.friend', cri.clickFriend);
+
+$('body').on('submit', '.messageForm', cri.sendMessage);
