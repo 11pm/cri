@@ -62,7 +62,7 @@ var cri = {
 		var data = that.data();
 
 		var chat = $('.chat');
-		chat.html("<h1>" + data.username+ "</h1>");
+		cri.renderTemplate('chat', data);
 
 	},
 
