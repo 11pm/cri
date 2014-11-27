@@ -38,7 +38,10 @@ var cri = {
 		console.log(password)
 		webClient.send({type: "login", data: { username: username, password: password }}, function(response){
 			//worked MA
-			console.log(response)
+			var response = JSON.parse(response.data);
+
+
+			console.log(response.success);
 			/*if(response.data != "nope"){
 				localStorage.setItem("id", response.data);
 				cri.init();

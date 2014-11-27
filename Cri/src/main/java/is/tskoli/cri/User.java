@@ -35,6 +35,7 @@ public class User extends Database{
         if(super.login(this)){
             //if login worked, load new data
             this.data = super.userData(this);
+            //load the users friends
             this.friends = super.userFriends(this);
             return true;
         }

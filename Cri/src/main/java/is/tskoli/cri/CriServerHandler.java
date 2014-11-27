@@ -42,10 +42,15 @@ public class CriServerHandler{
                     
                     //check if cretentials are correct
                     if(clientUser.login()){
-                        return clientUser.friends.get(0).username;
+                        //return user details, user friends
+                        List<Friend> friends = clientUser.friends;
+                        Map<String, String> details = clientUser.data;
+                        
+                        
                     }
                     else{
-                        return "nope";
+                        //send {"success": false} to client
+                        return new JSONObject().put("success", false).toString();
                     }
 
             }
