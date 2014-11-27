@@ -19,6 +19,9 @@ var cri = {
 
 		if(cri.isAuth()){
 			cri.renderTemplate('main', cri.user);
+			webClient.send({type: "message"}, function(response){
+				console.log(response)
+			})
 		}
 		else{
 			cri.renderTemplate('login');

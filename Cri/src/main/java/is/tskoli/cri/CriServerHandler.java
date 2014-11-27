@@ -23,10 +23,10 @@ import org.json.*;
 @ServerEndpoint("/server")
 public class CriServerHandler{
     private static Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
-    private User clientUser;
+    private static User clientUser;
     
     @OnMessage
-    public String handleClient(String jsonFromClient) throws JSONException, Exception  {
+    public String handleClient(String jsonFromClient, Session s) throws JSONException, Exception  {
      
         JSONObject obj = new JSONObject(jsonFromClient);
 
@@ -38,7 +38,8 @@ public class CriServerHandler{
                     String username = (String) data.get("username");
                     String password = (String) data.get("password");
                     //create User object
-                    clientUser = new User(username, password);
+                    clientUser = new User(username, password, s);
+                    
                     
                     //check if cretentials are correct
                     if(clientUser.login()){
@@ -52,7 +53,10 @@ public class CriServerHandler{
                         //send {"success": false} to client
                         return new JSONObject().put("success", false).toString();
                     }
-
+                case "message":
+                    return clientUser.test();
+                    
+                    
             }
         return "le 500";    
         //return obj.getString("type");     

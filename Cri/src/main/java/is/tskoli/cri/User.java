@@ -5,6 +5,7 @@
  */
 package is.tskoli.cri;
 import java.util.*;
+import javax.websocket.Session;
 /**
  *
  * @author alexander
@@ -13,18 +14,20 @@ public class User extends Database{
     
     public String username;
     public String password;
+    public Session sesh;
     
     public Map<String, String> data = new HashMap<>();
     
     public List<Map<String, String>> friends = new ArrayList<>();
     //public String f;
     
-    public User(String username, String password){
+    public User(String username, String password, Session s){
         try{
             //connect to database
             super.connect();
             this.username = username;
             this.password = password;
+            this.sesh = s;
         }
         catch(Exception e){
             e.getStackTrace();
@@ -40,6 +43,16 @@ public class User extends Database{
             return true;
         }
         return false;
+    }
+    
+    public void sendMessage(User reciever){
+        
+       //reciever.sesh.
+        
+    }
+    
+    public String test(){
+        return "Hello from message";
     }
     
 }
