@@ -61,7 +61,7 @@ class Database{
         
         return temp;
     }
-    public List<Friend> userFriends(User u) throws Exception{
+    public String userFriends(User u) throws Exception{
         List<Friend> templist = new ArrayList<>();
         
         String query = "SELECT u2.id, u2.username FROM friendlist"
@@ -73,11 +73,7 @@ class Database{
         prepSt.setString(1, u.data.get("id"));
         rs = prepSt.executeQuery();
         
-        //Go through all friends
-        while(rs.next()){
-            templist.add(new Friend(rs.getString("id"), rs.getString("username")));
-        }
         
-        return templist;
+        return u.data.get("id");
     }
 }

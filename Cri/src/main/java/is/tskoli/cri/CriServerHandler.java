@@ -42,19 +42,15 @@ public class CriServerHandler{
                     
                     //check if cretentials are correct
                     if(clientUser.login()){
-                        return "a";
+                        return clientUser.f;
                     }
                     else{
                         return "nope";
                     }
 
-                case "friends":
-                    //return clientUser.username;
-                    //return clientUser.getFriends();
-
-        }
+            }
         return "le 500";    
-               
+        //return obj.getString("type");     
         
     }
     

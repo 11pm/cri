@@ -34,8 +34,8 @@ var cri = {
 		var that = $(this);
 		var username = that.find('.username').val();
 		var password = that.find('.password').val();
-		
-
+		console.log(username)
+		console.log(password)
 		webClient.send({type: "login", data: { username: username, password: password }}, function(response){
 			//worked MA
 			console.log(response)
