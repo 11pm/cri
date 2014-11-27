@@ -55,6 +55,17 @@ var cri = {
 		});
 	},
 
+	clickFriend: function(e){
+
+		e.preventDefault();
+		var that = $(this);
+		var data = that.data();
+
+		var chat = $('.chat');
+		chat.html("<h1>" + data.username+ "</h1>");
+
+	},
+
 	renderTemplate: function(name, context){
 
 		var templateName = function(name){
@@ -91,3 +102,5 @@ $(document).ready(cri.init);
 
 //Login submited
 $('body').on('submit', '.loginForm', cri.login);
+
+$('body').on('click', '.friend', cri.clickFriend);
