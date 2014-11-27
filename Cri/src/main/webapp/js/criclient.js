@@ -2,7 +2,13 @@ var cri = {
 	templateFolder: 'templates/',
 	
 	//all details about a user	
-	user: {},
+	user: {
+		id: -1, 
+		username: null,
+		password: null, 
+		user_created: null,
+		friends: []
+	},
 
 	init: function(){
 		var local_user = localStorage.getItem('id');
@@ -13,7 +19,6 @@ var cri = {
 
 		if(cri.isAuth()){
 			cri.renderTemplate('main');
-			console.log("is auth")
 		}
 		else{
 			cri.renderTemplate('login');
@@ -37,17 +42,16 @@ var cri = {
 			//login worked
 			if(response.success === true){
 
-				cri.user.details = response.details;
+				cri.user = response.details;
 				cri.user.friends = response.friends;
+
+				localStorage.setItem("id", cri.user.id);
+				cri.init();
 
 			}
 			else{
 				console.log("too bad");
 			}
-			/*if(response.data != "nope"){
-				localStorage.setItem("id", response.data);
-				cri.init();
-			}*/
 		});
 	},
 

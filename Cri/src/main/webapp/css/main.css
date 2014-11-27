@@ -42,6 +42,11 @@ body {
 
 }
 
+.profile .username{
+	color: white;
+	text-align: center;
+}
+
 .options {
 	padding: 20px 0;
 	height: 30%;
