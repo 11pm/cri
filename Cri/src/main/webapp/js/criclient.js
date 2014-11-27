@@ -18,7 +18,7 @@ var cri = {
 		}
 
 		if(cri.isAuth()){
-			cri.renderTemplate('main');
+			cri.renderTemplate('main', cri.user);
 		}
 		else{
 			cri.renderTemplate('login');
@@ -55,7 +55,7 @@ var cri = {
 		});
 	},
 
-	renderTemplate: function(name){
+	renderTemplate: function(name, context){
 
 		var templateName = function(name){
 			return cri.templateFolder + name + '.html';
@@ -65,7 +65,13 @@ var cri = {
 			url: templateName(name),
 			type: "GET",
 			success: function(html){
-				$('.'+name).html(html);
+				var template = Handlebars.compile(html);
+
+				//if we have hsb var, use them
+				if(typeof context !== "undefined")
+					$('.'+name).html(template(context));
+				else
+					$('.'+name).html(html);
 			} 
 		});
 
