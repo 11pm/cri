@@ -26,7 +26,7 @@ class Database{
     }
     public Boolean login(User u) throws Exception{
       
-        String query = "SELECT * FROM users WHERE username = ? AND user_password = ?";
+        String query = "CALL login(?, ?)";
         
         prepSt = con.prepareStatement(query);
         prepSt.setString(1, u.username);
@@ -34,18 +34,15 @@ class Database{
         rs = prepSt.executeQuery();
         
         
-        if(rs.next()){
-            return true; 
-        }
-        return false;
+        return rs.next();
         
     }
     //get every thing about an user, this method is only called if user is logged in
     public Map<String, String> userData(User u) throws Exception{
         
-        Map<String, String> temp = new HashMap<String, String>();
+        Map<String, String> temp = new HashMap<>();
         
-        String query = "SELECT * FROM users WHERE username = ? AND user_password = ?";
+        String query = "CALL login(?, ?)";
         
         prepSt = con.prepareStatement(query);
         prepSt.setString(1, u.username);
@@ -61,19 +58,19 @@ class Database{
         
         return temp;
     }
-    public String userFriends(User u) throws Exception{
+    public List<Friend> userFriends(User u) throws Exception{
         List<Friend> templist = new ArrayList<>();
         
-        String query = "SELECT u2.id, u2.username FROM friendlist"
-                + "INNER JOIN users u1 ON friendlist.userID = u1.id"
-                + "INNER JOIN users u2 ON friendlist.friendID = u2.id"
-                + "WHERE u1.id = ?";
+        String query = "CALL friends(?)";
         
         prepSt = con.prepareStatement(query);
         prepSt.setString(1, u.data.get("id"));
         rs = prepSt.executeQuery();
         
-        
-        return u.data.get("id");
+        //go through all records
+        while(rs.next()){
+            templist.add(new Friend(rs.getString("id"), rs.getString("username")));
+        }
+        return templist;
     }
 }

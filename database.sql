@@ -23,19 +23,18 @@ INSERT INTO users (username, user_password) VALUES ("halldor32", "password");
 
 INSERT INTO friendlist (userID, friendID) values (1, 2);
 
+-- get user details
 delimiter $$
-
 DROP procedure if exists login $$
 
 create procedure login(_username varchar(20), _password varchar(60))
 begin
 	SELECT * FROM users WHERE username = _username AND user_password = _password;
 end $$;
-
 delimiter ;
 
+-- 
 delimiter $$
-
 drop procedure if exists friends $$
 
 create procedure friends(_id varchar(1))

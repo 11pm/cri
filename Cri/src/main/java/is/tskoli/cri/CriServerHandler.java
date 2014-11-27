@@ -42,7 +42,7 @@ public class CriServerHandler{
                     
                     //check if cretentials are correct
                     if(clientUser.login()){
-                        return clientUser.f;
+                        return clientUser.friends.get(0).username;
                     }
                     else{
                         return "nope";
