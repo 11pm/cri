@@ -58,12 +58,12 @@ public class CriServerHandler{
                                     
                             List<Map<String, String>> friends = client.friends;
                             Map<String, String> details = client.data;
-                            s.getBasicRemote().sendText(new JSONObject().put("success", true).put("details", details).put("friends", friends).toString());
+                            s.getBasicRemote().sendText(new JSONObject().put("type", "login").put("success", true).put("details", details).put("friends", friends).toString());
                             
                         }
                         else{
                             //send {"success": false} to client
-                            s.getBasicRemote().sendText(new JSONObject().put("success", false).toString());
+                            s.getBasicRemote().sendText(new JSONObject().put("type", "login").put("success", false).toString());
                         }
                     } catch (Exception ex) {
                         Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);

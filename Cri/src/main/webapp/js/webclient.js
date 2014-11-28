@@ -17,10 +17,6 @@ websocket.onopen = function(response){
 	console.log(response)
 };
 
-websocket.onmessage = function(response){
-	console.log(response)
-}
-
 var webClient = {
 	send: function (message, callback) {
 		

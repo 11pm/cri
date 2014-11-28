@@ -83,7 +83,9 @@ public class User extends Database{
             
             //if he is a friend
             if(this.isFriend(userTo.username)){
-                this.sendToBoth(to, responseMessage);
+                
+                Message.sendToBoth(this.sesh, to, message);
+                
             }
 
         } catch (JSONException ex) {
@@ -91,25 +93,5 @@ public class User extends Database{
         }
         
     }
-        
     
-    
-    //Send a message to a receiver
-    private void send(Session to, String message){
-        try {
-            to.getBasicRemote().sendText(message);
-        } catch (IOException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    //Send to receiver/user
-    private void sendToBoth(Session to, String message){
-        try {
-            to.getBasicRemote().sendText(message);
-            this.sesh.getBasicRemote().sendText(message);
-        } catch (IOException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }

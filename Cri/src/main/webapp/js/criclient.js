@@ -155,7 +155,7 @@ $('body').on('click', '.friend', cri.clickFriend);
 
 $('body').on('submit', '.messageForm', cri.sendMessage);
 
-webClient.onmessage = function(response){
+websocket.onmessage = function(response){
 
 	cri.onmessage(response);
 
