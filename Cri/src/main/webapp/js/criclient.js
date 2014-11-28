@@ -24,12 +24,18 @@ var cri = {
 
 	//handle responses from server
 	onmessage: function(response){
-		var type = JSON.parse(response.data);
 		console.log(response)
+		//convert response to JSON
+		var response = JSON.parse(response.data);
+		var type = response.type;
+		console.log(type)
 		//the type of response
-		switch(type.type){
+		switch(type){
 			case "login":
 				handler.login(response);
+				break;
+			case "PM":
+				handler.message(response);
 				break;
 		}
 
@@ -109,25 +115,15 @@ var cri = {
 		var receiver = $(this).find('.receiver').data("receiver");
 		var message = $(this).find('.message').val();
 		
+		//Send message to server
 		webClient.send({type: "private", 
 			data: {
 				message: message, 
 				sender: sender, 
 				receiver: receiver
 			}
-		}, function(response){
-			
-			//get json from server
-			var fromServer = JSON.parse(response.data);
-			console.log(fromServer)
-			var chatMsg = cri.chatMessage(fromServer);
-
-			$(".messages").append(chatMsg);
-
 		});
-
 		
-
 	},
 
 };

@@ -1,14 +1,11 @@
 /*
 @name: Handler
 @author: 11pm
-@desc: handles websocket responses
+@role: handles websocket responses
 */
 var handler = {
 
 	login: function(response){
-
-		console.log(response)
-		response = JSON.parse(response.data);
 
 		//login worked
 		if(response.success === true){
@@ -22,6 +19,11 @@ var handler = {
 			console.log("too bad");
 		}
 
+	},
+	
+	message: function(response){
+		var chatMsg = cri.chatMessage(response);
+		$(".messages").append(chatMsg);
 	}
 
 }

@@ -78,13 +78,13 @@ public class User extends Database{
             String sender   = data.getString("sender");
             String receiver = data.getString("receiver");
             
-            String responseMessage = new JSONObject().put("message", message).put("sender", sender).put("receiver", receiver).toString();
+            String responseMessage = new JSONObject().put("type", "PM").put("message", message).put("sender", sender).put("receiver", receiver).toString();
             User userTo = (User) to.getUserProperties().get("user");
             
             //if he is a friend
             if(this.isFriend(userTo.username)){
                 
-                Message.sendToBoth(this.sesh, to, message);
+                Message.sendToBoth(this.sesh, to, responseMessage);
                 
             }
 
