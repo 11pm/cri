@@ -50,6 +50,7 @@ public class User extends Database{
                 this.data = super.userData(this);
                 //load the users friends
                 this.friends = super.userFriends(this);
+ 
                 return true;
             }
         } catch (Exception ex) {

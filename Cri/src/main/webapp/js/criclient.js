@@ -113,17 +113,18 @@ var cri = {
 		e.preventDefault();
 		var sender = cri.user.username;
 		var receiver = $(this).find('.receiver').data("receiver");
-		var message = $(this).find('.message').val();
+		var message = $(this).find('.message');
 		
 		//Send message to server
 		webClient.send({type: "private", 
 			data: {
-				message: message, 
+				message: message.val(), 
 				sender: sender, 
 				receiver: receiver
 			}
 		});
-		
+		//Clear the box
+		message.text("");
 	},
 
 };

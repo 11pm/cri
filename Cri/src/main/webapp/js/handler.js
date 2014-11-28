@@ -26,7 +26,7 @@ var handler = {
 		var you    = cri.user.username;
 
 		//if you did not send the message
-		if(sender !== you){
+		/*if(sender !== you){
 			alert("You just got a message from " + response.sender);
 
 			var context = {
@@ -34,7 +34,7 @@ var handler = {
 			}
 			//open chat with the user that sent you a message
 			cri.renderTemplate("chat", context);			
-		}
+		}*/
 
 		var chatMsg = cri.chatMessage(response);
 		$(".messages").append(chatMsg);

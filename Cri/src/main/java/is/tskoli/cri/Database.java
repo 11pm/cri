@@ -93,6 +93,7 @@ class Database{
                 
                 tempMap.put("id", rs.getString("id"));
                 tempMap.put("username", rs.getString("username"));
+                
                 templist.add(tempMap);
             }
             
