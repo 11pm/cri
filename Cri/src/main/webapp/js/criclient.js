@@ -26,6 +26,11 @@ var cri = {
 
 	},
 
+	//handle responses from server
+	onmessage: function(response){
+		console.log(response)
+	},
+
 	isAuth: function(){
 		return this.user.id > 0;
 	},
@@ -118,7 +123,7 @@ var cri = {
 		var receiver = $(this).find('.receiver').data("receiver");
 		var message = $(this).find('.message').val();
 		
-		webClient.send({type: "message", 
+		webClient.send({type: "private", 
 			data: {
 				message: message, 
 				sender: sender, 
@@ -149,3 +154,9 @@ $('body').on('submit', '.loginForm', cri.login);
 $('body').on('click', '.friend', cri.clickFriend);
 
 $('body').on('submit', '.messageForm', cri.sendMessage);
+
+webClient.onmessage = function(response){
+
+	cri.onmessage(response);
+
+}

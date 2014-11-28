@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package is.tskoli.cri;
+import java.io.IOException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.websocket.Session;
+import org.json.JSONException;
 import org.json.JSONObject;
 /**
  *
@@ -68,15 +70,46 @@ public class User extends Database{
         return false;
     }
     
-    public void sendPrivate(Session to, String message){
+    public void sendPrivate(Session to, JSONObject data){
+       
         
-       User userTo = (User) to.getUserProperties().get("user");
-      
+        try {
+            String message  = data.getString("message");
+            String sender   = data.getString("sender");
+            String receiver = data.getString("receiver");
+            
+            String responseMessage = new JSONObject().put("message", message).put("sender", sender).put("receiver", receiver).toString();
+            User userTo = (User) to.getUserProperties().get("user");
+            
+            //if he is a friend
+            if(this.isFriend(userTo.username)){
+                this.sendToBoth(to, responseMessage);
+            }
+
+        } catch (JSONException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
+        
     
-    public String test(){
-        return "Hello from message";
+    
+    //Send a message to a receiver
+    private void send(Session to, String message){
+        try {
+            to.getBasicRemote().sendText(message);
+        } catch (IOException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
+    //Send to receiver/user
+    private void sendToBoth(Session to, String message){
+        try {
+            to.getBasicRemote().sendText(message);
+            this.sesh.getBasicRemote().sendText(message);
+        } catch (IOException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

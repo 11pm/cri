@@ -28,10 +28,6 @@ var webClient = {
         	console.log('sending to server...')
         	websocket.send(JSON.stringify(message));
 	        
-		    websocket.onmessage = function(response){
-		       	callback(response);
-			};
-	        
 	    }, 1000);
 	},
 

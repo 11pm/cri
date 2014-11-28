@@ -69,40 +69,11 @@ public class CriServerHandler{
                         Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 break;
-                case "message":
-                    this.json = this.json.getJSONObject("data");
-                    String message = this.json.getString("message");
-                    String sender = this.json.getString("sender");
-                    String receiver = this.json.getString("receiver");
-                            
-                    client = (User) s.getUserProperties().get("user");
-                    String responseMessage = new JSONObject().put("message", message).put("sender", sender).put("receiver", receiver).toString();
-            
-                    try {
-                        //s.getBasicRemote().sendText(responseMessage);
-                        
-                        for (Session sesh : CriServerHandler.allUsers){
-                            
-                            //create user obj of session
-                            User seshUser = (User) sesh.getUserProperties().get("user");
-                            //s.getBasicRemote().sendText(new JSONObject().put("user", seshUser.username).toString());
-                            
-                            //send to the receiver on your friend list
-                            if(client.isFriend(seshUser.username)){
-                                
-                                //send to you and your friend
-                                s.getBasicRemote().sendText(responseMessage);
-                                sesh.getBasicRemote().sendText(responseMessage);
-                                
-                                //s.getBasicRemote().sendText(new JSONObject().put("user", seshUser.username).toString());
-                            }
-                            
-                            client.sendPrivate(sesh, responseMessage);
-                            
-                        }
-                        
-                    } catch (IOException ex) {
-                        Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+                case "private":
+                               
+                    for (Session sesh : CriServerHandler.allUsers){
+                        //send message to correct user
+                        client.sendPrivate(sesh, this.json.getJSONObject("data"));                        
                     }
            
                 break;
