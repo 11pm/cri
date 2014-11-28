@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.websocket.Session;
+import org.json.JSONObject;
 /**
  *
  * @author alexander
@@ -16,6 +17,8 @@ public class User extends Database{
     
     public String username;
     public String password;
+    public Boolean online = true;
+    
     public Session sesh;
     
     public Map<String, String> data = new HashMap<>();
@@ -65,9 +68,10 @@ public class User extends Database{
         return false;
     }
     
-    public void sendMessage(User reciever){
+    public void sendPrivate(Session to, String message){
         
-       //reciever.sesh.
+       User userTo = (User) to.getUserProperties().get("user");
+      
         
     }
     

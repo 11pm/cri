@@ -76,7 +76,7 @@ public class CriServerHandler{
                     String receiver = this.json.getString("receiver");
                             
                     client = (User) s.getUserProperties().get("user");
-                    String responseMessage = new JSONObject().put("message", message).put("sender", sender).toString();
+                    String responseMessage = new JSONObject().put("message", message).put("sender", sender).put("receiver", receiver).toString();
             
                     try {
                         //s.getBasicRemote().sendText(responseMessage);
@@ -96,6 +96,8 @@ public class CriServerHandler{
                                 
                                 //s.getBasicRemote().sendText(new JSONObject().put("user", seshUser.username).toString());
                             }
+                            
+                            client.sendPrivate(sesh, responseMessage);
                             
                         }
                         
@@ -118,6 +120,11 @@ public class CriServerHandler{
 
     @OnClose
     public void onClose (Session peer) {
+        
+        //get details about the user that is closing, set him offline
+        User closingUser = (User) peer.getUserProperties().get("user");
+        closingUser.online = false;
+        
         allUsers.remove(peer);
     }
 
