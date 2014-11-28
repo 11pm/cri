@@ -1,15 +1,15 @@
 <h1>{{this.username}}</h1>
-<div class="messages">
+<div class="message-area">
 	
-	<div class="message">
-		<span class="button tiny">hallor</span>
-		<span>ayy lmao</span>
-	</div>
+	<ul class="small-block-grid-1 messages"></ul>
 
 </div>
 
 <form class="messageForm">
-	<input type="hidden" data-receiver="{{this.username}}">
+	<input 
+	type="hidden" 
+	class="receiver" 
+	data-receiver="{{this.username}}">
 	<textarea class="message"></textarea>
 	<input type="submit" class="button large" value="Send message">
 </form>

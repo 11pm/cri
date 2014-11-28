@@ -72,14 +72,31 @@ public class CriServerHandler{
                 case "message":
                     this.json = this.json.getJSONObject("data");
                     String message = this.json.getString("message");
+                    String sender = this.json.getString("sender");
+                    String receiver = this.json.getString("receiver");
+                            
+                    client = (User) s.getUserProperties().get("user");
+                    String responseMessage = new JSONObject().put("message", message).put("sender", sender).toString();
+            
                     try {
-                        client = (User) s.getUserProperties().get("user");
-                        for(Session sesh : allUsers){
-                            sesh.getBasicRemote().sendText(message);
+                        //s.getBasicRemote().sendText(responseMessage);
+                        
+                        for (Session sesh : CriServerHandler.allUsers){
+                            
+                            //create user obj of session
+                            User seshUser = (User) sesh.getUserProperties().get("user");
+                            
+                            //send to the receiver on your friend list
+                            if(client.isFriend(seshUser.username) && seshUser.username.equals(receiver)){
+                                s.getBasicRemote().sendText(responseMessage);
+                            }
+                            
                         }
+                        
                     } catch (IOException ex) {
                         Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
-                    }                    
+                    }
+           
                 break;
             }
         } catch (JSONException ex) {

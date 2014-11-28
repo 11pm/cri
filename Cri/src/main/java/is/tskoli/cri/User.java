@@ -53,6 +53,18 @@ public class User extends Database{
         return false;
     }
     
+    //check if username is in friendlist
+    public Boolean isFriend(String username){
+     
+        for(Map<String, String> friend : this.friends){
+            if(friend.get("username").equals(username)){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     public void sendMessage(User reciever){
         
        //reciever.sesh.

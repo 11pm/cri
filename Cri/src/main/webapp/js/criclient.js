@@ -91,17 +91,43 @@ var cri = {
 
 	},
 
+	chatMessage: function(msg){
+		var html = "";
+
+		//if its from you
+		if(cri.user.username == msg.sender)
+			html += "<li class='success'>";
+		else
+			html += "<li class='danger'>";
+
+		html += msg.sender;
+		html += msg.message;
+
+		html += "</li>";
+		return html;
+	},
+
 	//send the message server
 	sendMessage: function(e){
 		
 		e.preventDefault();
-
+		var sender = cri.user.username;
+		var receiver = $(this).find('.receiver').data("receiver");
 		var message = $(this).find('.message').val();
-
-		webClient.send({type: "message", data: {message: message}}, function(response){
+		
+		webClient.send({type: "message", 
+			data: {
+				message: message, 
+				sender: sender, 
+				receiver: receiver
+			}
+		}, function(response){
 			
-			var fromServer = response.data;
-			$(".messages .message").append(fromServer);	
+			//get json from server
+			var fromServer = JSON.parse(response.data);
+			var chatMsg = cri.chatMessage(fromServer);
+
+			$(".messages").append(chatMsg);
 
 		});
 
