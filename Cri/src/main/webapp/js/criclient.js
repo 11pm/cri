@@ -1,3 +1,4 @@
+
 var cri = {
 	templateFolder: 'templates/',
 	
@@ -11,12 +12,7 @@ var cri = {
 	},
 
 	init: function(){
-		/*var local_user = JSON.parse(localStorage.getItem("user"));
-		//User found
-		if(local_user){
-			cri.user = local_user;
-		}*/
-
+		//if user has correct credentials
 		if(cri.isAuth()){
 			cri.renderTemplate('main', cri.user);
 		}
@@ -28,38 +24,28 @@ var cri = {
 
 	//handle responses from server
 	onmessage: function(response){
+		var type = JSON.parse(response.data);
 		console.log(response)
+		//the type of response
+		switch(type.type){
+			case "login":
+				handler.login(response);
+				break;
+		}
+
 	},
 
 	isAuth: function(){
 		return this.user.id > 0;
 	},
 
-	login: function(e){
+	loginClick: function(e){
 		e.preventDefault();
 		var that = $(this);
 		var username = that.find('.username').val();
 		var password = that.find('.password').val();
 
-		webClient.send({type: "login", data: { username: username, password: password }}, function(response){
-			//worked MA
-			console.log(response)
-			response = JSON.parse(response.data);
-
-			//login worked
-			if(response.success === true){
-
-				cri.user = response.details;
-				cri.user.friends = response.friends;
-
-				localStorage.setItem("user", JSON.stringify(cri.user));
-				cri.init();
-
-			}
-			else{
-				console.log("too bad");
-			}
-		});
+		webClient.send({type: "login", data: { username: username, password: password }});
 	},
 
 	clickFriend: function(e){
@@ -149,7 +135,7 @@ var cri = {
 $(document).ready(cri.init);
 
 //Login submited
-$('body').on('submit', '.loginForm', cri.login);
+$('body').on('submit', '.loginForm', cri.loginClick);
 
 $('body').on('click', '.friend', cri.clickFriend);
 
