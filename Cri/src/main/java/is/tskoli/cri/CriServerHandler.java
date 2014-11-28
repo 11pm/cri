@@ -23,28 +23,29 @@ import java.util.logging.*;
 @ServerEndpoint("/server")
 public class CriServerHandler{
     private static Set<Session> allUsers = Collections.synchronizedSet(new HashSet<Session>());
-   
-    Logger logger = Logger.getAnonymousLogger();
-    User client;
+    //the user connected by ws
+    private User client;
+    //the json from client
+    private JSONObject json;
     
     @OnMessage
     public void handleClient(String jsonFromClient, Session s) {
         
-        JSONObject obj = null;
+        //convert string from client to JSON
         try {
-            obj = new JSONObject(jsonFromClient);
+            this.json = new JSONObject(jsonFromClient);
         } catch (JSONException ex) {
             Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
-            switch(obj.getString("type")){
+            switch(this.json.getString("type")){
                 //user request server to log him in
                 case "login":
 
-                    JSONObject data = obj.getJSONObject("data");
-                    String username = (String) data.get("username");
-                    String password = (String) data.get("password");
+                    this.json = this.json.getJSONObject("data");
+                    String username = (String) this.json.get("username");
+                    String password = (String) this.json.get("password");
                     
                     //create User object
                     s.getUserProperties().put("user", new User(username, password, s));
@@ -58,11 +59,10 @@ public class CriServerHandler{
                             List<Map<String, String>> friends = client.friends;
                             Map<String, String> details = client.data;
                             s.getBasicRemote().sendText(new JSONObject().put("success", true).put("details", details).put("friends", friends).toString());
-                            //return new JSONObject().put("success", true).put("details", details).put("friends", friends).toString();
+                            
                         }
                         else{
                             //send {"success": false} to client
-                            //return new JSONObject().put("success", false).toString();
                             s.getBasicRemote().sendText(new JSONObject().put("success", false).toString());
                         }
                     } catch (Exception ex) {
@@ -70,10 +70,13 @@ public class CriServerHandler{
                     }
                 break;
                 case "message":
-            
+                    this.json = this.json.getJSONObject("data");
+                    String message = this.json.getString("message");
                     try {
                         client = (User) s.getUserProperties().get("user");
-                        s.getBasicRemote().sendText(client.username);
+                        for(Session sesh : allUsers){
+                            sesh.getBasicRemote().sendText(message);
+                        }
                     } catch (IOException ex) {
                         Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
                     }                    
@@ -87,7 +90,7 @@ public class CriServerHandler{
     
     @OnOpen
     public void onOpen (Session peer) {
-        
+        allUsers.add(peer);
     }
 
     @OnClose

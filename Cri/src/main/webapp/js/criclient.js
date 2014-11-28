@@ -11,11 +11,11 @@ var cri = {
 	},
 
 	init: function(){
-		var local_user = JSON.parse(localStorage.getItem("user"));
+		/*var local_user = JSON.parse(localStorage.getItem("user"));
 		//User found
 		if(local_user){
 			cri.user = local_user;
-		}
+		}*/
 
 		if(cri.isAuth()){
 			cri.renderTemplate('main', cri.user);
@@ -96,11 +96,14 @@ var cri = {
 
 		var message = $(this).find('.message').val();
 
-		webClient.send({type: "message", data: {content: message}}, function(response){
-			console.log(response);
+		webClient.send({type: "message", data: {message: message}}, function(response){
+			
+			var fromServer = response.data;
+			$(".messages .message").append(fromServer);	
+
 		});
 
-		$(".messages .message").append(message);
+		
 
 	},
 
