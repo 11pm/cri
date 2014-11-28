@@ -23,6 +23,7 @@ var cri = {
 		else{
 			cri.renderTemplate('login');
 		}
+
 	},
 
 	isAuth: function(){
@@ -34,7 +35,7 @@ var cri = {
 		var that = $(this);
 		var username = that.find('.username').val();
 		var password = that.find('.password').val();
-		
+
 		webClient.send({type: "login", data: { username: username, password: password }}, function(response){
 			//worked MA
 			console.log(response)
@@ -76,6 +77,7 @@ var cri = {
 		$.ajax({
 			url: templateName(name),
 			type: "GET",
+			cache: false,
 			success: function(html){
 				var template = Handlebars.compile(html);
 
