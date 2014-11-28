@@ -100,8 +100,11 @@ var cri = {
 		else
 			html += "<li class='danger'>";
 
+		html += "<div class='panel'>";
 		html += msg.sender;
+		html += "<br>";
 		html += msg.message;
+		html += "</div>";
 
 		html += "</li>";
 		return html;
@@ -125,6 +128,7 @@ var cri = {
 			
 			//get json from server
 			var fromServer = JSON.parse(response.data);
+			console.log(fromServer)
 			var chatMsg = cri.chatMessage(fromServer);
 
 			$(".messages").append(chatMsg);

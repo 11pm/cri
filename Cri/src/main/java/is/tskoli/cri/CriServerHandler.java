@@ -85,10 +85,16 @@ public class CriServerHandler{
                             
                             //create user obj of session
                             User seshUser = (User) sesh.getUserProperties().get("user");
+                            //s.getBasicRemote().sendText(new JSONObject().put("user", seshUser.username).toString());
                             
                             //send to the receiver on your friend list
-                            if(client.isFriend(seshUser.username) && seshUser.username.equals(receiver)){
+                            if(client.isFriend(seshUser.username)){
+                                
+                                //send to you and your friend
                                 s.getBasicRemote().sendText(responseMessage);
+                                sesh.getBasicRemote().sendText(responseMessage);
+                                
+                                //s.getBasicRemote().sendText(new JSONObject().put("user", seshUser.username).toString());
                             }
                             
                         }
