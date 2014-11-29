@@ -18,10 +18,31 @@ create table friendlist(
 	constraint friend_user_FK foreign key (friendID) references users (id)
 );
 
+create table groups(
+	groupID int auto_increment,
+	groupname varchar(255),
+	group_created timestamp,
+	constraint group_PK primary key(groupID)
+);
+
+create table group_users(
+	userID int,
+	groupID int,
+	CONSTRAINT group_users_PK primary key(userID, groupID),
+	constraint users_FK foreign key (userID) references users(id),
+	constraint group_FK foreign key (groupID) references groups(groupID)
+);
+
 INSERT INTO users (username, user_password) VALUES ("11pm", "password");
 INSERT INTO users (username, user_password) VALUES ("halldor32", "password");
 
 INSERT INTO friendlist (userID, friendID) values (1, 2);
+INSERT INTO friendlist (userID, friendID) values (2, 1);
+
+INSERT INTO groups(groupname) VALUES ("The best call ever");
+
+INSERT INTO group_users (userID, groupID) VALUES (1, 1);
+INSERT INTO group_users (userID, groupID) VALUES (2, 1);
 
 -- get user details
 delimiter $$
