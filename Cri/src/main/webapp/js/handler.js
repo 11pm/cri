@@ -10,8 +10,9 @@ var handler = {
 		//login worked
 		if(response.success === true){
 
-			cri.user = response.details;
+			cri.user         = response.details;
 			cri.user.friends = response.friends;
+			cri.user.groups  = response.groups;
 
 			cri.init();
 		}

@@ -28,6 +28,7 @@ public class User extends Database{
     public List<Map<String, String>> friends = new ArrayList<>();
     public List<User> userFriends = new ArrayList<>();
     public List<Session> sessionFriends = new ArrayList<>();
+    public List<Map<String, String>> groups = new ArrayList<>();
     //public String f;
     
     public User(String username, String password, Session s){
@@ -50,7 +51,8 @@ public class User extends Database{
                 this.data = super.userData(this);
                 //load the users friends
                 this.friends = super.userFriends(this);
- 
+                this.groups = super.userGroups(this);
+                
                 return true;
             }
         } catch (Exception ex) {

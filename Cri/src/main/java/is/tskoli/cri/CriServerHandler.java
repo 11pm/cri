@@ -58,7 +58,8 @@ public class CriServerHandler{
                                     
                             List<Map<String, String>> friends = client.friends;
                             Map<String, String> details = client.data;
-                            s.getBasicRemote().sendText(new JSONObject().put("type", "login").put("success", true).put("details", details).put("friends", friends).toString());
+                            List<Map<String, String>>  groups = client.groups;
+                            s.getBasicRemote().sendText(new JSONObject().put("type", "login").put("success", true).put("details", details).put("friends", friends).put("groups", groups).toString());
                             
                         }
                         else{

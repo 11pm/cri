@@ -24,8 +24,10 @@
         </form>  
       </div>
 
+      <div></div>
+
       <div class="list">
-        <ul class="side-nav">
+        <ul class="side-nav Contacts">
           {{#each this.friends}}
             <li
             data-id="{{this.id}}"
@@ -33,7 +35,18 @@
             class="friend"
             >{{this.username}}</li>
           {{/each}}
+        </ul>
+
+        <ul class="side-nav Groups">
+          {{#each this.groups}}
+            <li
+            data-id="{{this.id}}"
+            data-name="{{this.groupname}}"
+            class="group"
+            >{{this.groupname}}</li>
+          {{/each}}
         </ul> 
+
       </div>
       
     </div>

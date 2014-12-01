@@ -137,6 +137,10 @@ body {
 	margin: 0;
 }
 
+.list .side-nav:not(:first-child){
+	display: none;
+}
+
 .list .side-nav li.active {
 	border-left: 2px solid #00BB8E;
 	background-color: #373A43;

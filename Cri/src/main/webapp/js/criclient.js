@@ -8,7 +8,8 @@ var cri = {
 		username: null,
 		password: null, 
 		user_created: null,
-		friends: []
+		friends: [],
+		groups: []
 	},
 
 	//keep history of user chat
@@ -90,6 +91,14 @@ var cri = {
 		$(this).addClass("active");
 		//update menu with content
 		$('.list-header').html(item);
+
+		//hide all items
+		$('.list ul').each(function(){
+			$(this).hide();
+		});
+		
+		//show relevant details
+		$('.list').find("."+item).show();
 	},
 
 	renderTemplate: function(name, context){
@@ -184,6 +193,6 @@ $('body').on('click', '.friend', cri.clickFriend);
 $('body').on('submit', '.messageForm', cri.sendMessage);
 
 //sidebar menu
-$('body').on('click', '.side-nav li', cri.changeMenu);
+$('body').on('click', '.options .side-nav li', cri.changeMenu);
 //make a custom handler for ws onmessage
 websocket.onmessage = cri.onmessage;

@@ -103,4 +103,33 @@ class Database{
         }
         return null;
     }
+    
+    public List<Map<String, String>> userGroups(User u){
+        
+        try {
+            List<Map<String, String>> templist = new ArrayList<>();
+            
+            String query = "CALL getUserGroups(?)";
+            
+            prepSt = con.prepareStatement(query);
+            prepSt.setString(1, u.data.get("id"));
+            rs = prepSt.executeQuery();
+            
+            //go through all records
+            while(rs.next()){
+                Map<String, String> tempMap = new HashMap<>();
+                
+                tempMap.put("id", rs.getString("id"));
+                tempMap.put("groupname", rs.getString("groupname"));
+                tempMap.put("group_created", rs.getString("group_created"));
+                templist.add(tempMap);
+            }
+            
+            return templist;
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+        
+    }
 }
