@@ -11,6 +11,9 @@ var cri = {
 		friends: []
 	},
 
+	//keep history of user chat
+	chat: [],
+
 	init: function(){
 		//if user has correct credentials
 		if(cri.isAuth()){
@@ -109,6 +112,12 @@ var cri = {
 		return html;
 	},
 
+	//Get messages from history for a certain user
+	getChatMessages: function(from){
+
+
+	},
+
 	//send the message server
 	sendMessage: function(e){
 		
@@ -140,8 +149,5 @@ $('body').on('click', '.friend', cri.clickFriend);
 
 $('body').on('submit', '.messageForm', cri.sendMessage);
 
-websocket.onmessage = function(response){
-
-	cri.onmessage(response);
-
-}
+//make a custom handler for ws onmessage
+websocket.onmessage = cri.onmessage;

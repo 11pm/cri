@@ -24,7 +24,7 @@ var handler = {
 	message: function(response){
 		var sender = response.sender;
 		var you    = cri.user.username;
-
+		console.log(response)
 		//if you did not send the message
 		/*if(sender !== you){
 			alert("You just got a message from " + response.sender);
