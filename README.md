@@ -1,7 +1,7 @@
 # CRI
 I cri evertim
 
-Javascript websocket chat client
+Javascript websocket chat client with a Java Maven backend 
 
 ![cri img](https://31.media.tumblr.com/b17ce9a0b9d3ad00f2369378ef4bda50/tumblr_inline_na5ezqTLbz1rahabv.gif)
 
