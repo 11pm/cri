@@ -3,7 +3,7 @@ create database cri;
 use cri;
 
 create table users(
-	id int auto_increment,
+	id int(11) auto_increment,
 	username varchar(20),
 	user_password varchar(60),
 	user_created timestamp,
@@ -11,27 +11,25 @@ create table users(
 );
 
 create table friendlist(
-	userID int,
-	friendID int,
+	userID int(11),
+	friendID int(11),
 	constraint friends_PK primary key(userID, friendID),
 	constraint users_FK foreign key (userID) references users (id),
 	constraint friend_user_FK foreign key (friendID) references users (id)
 );
 
 create table groups(
-	groupID int auto_increment,
+	id int(11) auto_increment,
 	groupname varchar(255),
 	group_created timestamp,
-	constraint group_PK primary key(groupID)
+	constraint group_PK primary key (id)
+);
+create table group_users(
+	userID int(11),
+	groupID int(11),
+	constraint group_users_PK primary key(userID, groupID)
 );
 
-create table group_users(
-	userID int,
-	groupID int,
-	CONSTRAINT group_users_PK primary key(userID, groupID),
-	constraint users_FK foreign key (userID) references users(id),
-	constraint group_FK foreign key (groupID) references groups(groupID)
-);
 
 INSERT INTO users (username, user_password) VALUES ("11pm", "password");
 INSERT INTO users (username, user_password) VALUES ("halldor32", "password");
