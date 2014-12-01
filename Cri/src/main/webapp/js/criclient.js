@@ -77,6 +77,20 @@ var cri = {
 		cri.renderTemplate('chat', context);
 
 	},
+	//change menu items
+	changeMenu: function(e){
+		var item = $(this).html();
+
+		//remove active class of every
+		$('.side-nav li').each(function(){
+			$(this).removeClass('active');
+		});
+
+		//add active class to selected
+		$(this).addClass("active");
+		//update menu with content
+		$('.list-header').html(item);
+	},
 
 	renderTemplate: function(name, context){
 
@@ -169,5 +183,7 @@ $('body').on('click', '.friend', cri.clickFriend);
 
 $('body').on('submit', '.messageForm', cri.sendMessage);
 
+//sidebar menu
+$('body').on('click', '.side-nav li', cri.changeMenu);
 //make a custom handler for ws onmessage
 websocket.onmessage = cri.onmessage;
