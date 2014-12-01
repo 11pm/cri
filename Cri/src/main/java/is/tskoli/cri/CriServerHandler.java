@@ -65,7 +65,7 @@ public class CriServerHandler{
                             //send {"success": false} to client
                             s.getBasicRemote().sendText(new JSONObject().put("type", "login").put("success", false).toString());
                         }
-                    } catch (Exception ex) {
+                    } catch (JSONException | IOException ex) {
                         Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 break;

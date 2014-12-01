@@ -26,9 +26,8 @@ var cri = {
 	onmessage: function(response){
 		console.log(response)
 		//convert response to JSON
-		var response = JSON.parse(response.data);
+		response = JSON.parse(response.data);
 		var type = response.type;
-		console.log(type)
 		//the type of response
 		switch(type){
 			case "login":
@@ -36,6 +35,9 @@ var cri = {
 				break;
 			case "PM":
 				handler.message(response);
+				break;
+			default:
+				console.log(response)
 				break;
 		}
 
