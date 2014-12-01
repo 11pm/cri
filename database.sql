@@ -65,3 +65,35 @@ begin
 end $$
 
 delimiter ;
+
+delimiter $$
+drop procedure if exists createGroup $$
+
+create procedure createGroup(_groupname varchar(255))
+begin
+	INSERT INTO groups(groupname) VALUES (_groupname);
+end $$
+
+delimiter ;
+
+delimiter $$
+drop procedure if exists joinGroup $$
+
+create procedure joinGroup(_groupID int, _userID int)
+begin
+	INSERT INTO group_users (userID, groupID) VALUES (_groupID, _userID);
+end $$
+delimiter ;
+
+delimiter $$
+drop procedure if exists getGroup $$
+
+create procedure getGroup(_groupID int)
+begin
+	SELECT * from users
+	INNER JOIN group_users
+	ON users.id = group_users.userID
+	INNER JOIN groups
+	ON group_users.groupID = groups.id
+	WHERE groups.id = _groupID;
+end $$
