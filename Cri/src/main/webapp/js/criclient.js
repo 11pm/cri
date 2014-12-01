@@ -62,11 +62,19 @@ var cri = {
 	clickFriend: function(e){
 
 		e.preventDefault();
-		var that = $(this);
-		var data = that.data();
-
+		var data = $(this).data();
 		var chat = $('.chat');
-		cri.renderTemplate('chat', data);
+
+		//get chat message from the user
+		var messages = cri.getChatMessages(data.username);
+		console.log(messages)
+		
+		var context = {
+			user: data,
+			messages: messages
+		};
+
+		cri.renderTemplate('chat', context);
 
 	},
 
@@ -114,8 +122,20 @@ var cri = {
 
 	//Get messages from history for a certain user
 	getChatMessages: function(from){
+		//a collection of messages to return
+		var messages = [];
+		cri.chat.forEach(function(obj, index) {
 
+			//get message from you and to you
+			var sender = obj.sender == from;
+			var receiver = obj.receiver == cri.user.username;
 
+			if(sender || receiver){
+				messages.push(obj);
+			}
+
+		});
+		return messages;
 	},
 
 	//send the message server

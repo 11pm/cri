@@ -81,7 +81,7 @@ public class User extends Database{
             
             String responseMessage = new JSONObject().put("type", "PM").put("message", message).put("sender", sender).put("receiver", receiver).toString();
             User userTo = (User) to.getUserProperties().get("user");
-            this.sesh.getBasicRemote().sendText(new JSONObject().put("username", userTo.username).put("rece", receiver).toString());
+
             //if he is a friend and he is the person you wanted to talk to
             if(this.isFriend(userTo.username) && receiver.equals(userTo.username)){
                 
@@ -89,7 +89,7 @@ public class User extends Database{
                 
             }
 
-        } catch (JSONException | IOException ex) {
+        } catch (JSONException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
         
