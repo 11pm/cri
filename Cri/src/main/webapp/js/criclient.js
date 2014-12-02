@@ -88,10 +88,11 @@ var cri = {
 		users: all the users in the group
 		*/
 		var context = {
-
+			group: data,
+			messages: []
 		};
 
-		cri.renderTemplate('group', context);
+		cri.renderTemplate('grouptpl', context);
 	},
 
 	//change menu items
