@@ -152,3 +152,7 @@ body {
 	color: #BBBCC0;
 	cursor: pointer;
 }
+
+.view{
+	height: 100vh;
+}

@@ -73,6 +73,12 @@ public class User extends Database{
         return false;
     }
     
+    public Boolean isInGroup(String username){
+        
+        
+        return false;
+    }
+    
     public void sendPrivate(Session to, JSONObject data){
        
         
@@ -91,6 +97,20 @@ public class User extends Database{
                 
             }
 
+        } catch (JSONException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void sendGroup(Session to, JSONObject data){
+        
+        try {
+            String group  = data.getString("group");
+            String sender = data.getString("sender");
+            
+            
+            
         } catch (JSONException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }

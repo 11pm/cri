@@ -69,7 +69,7 @@ public class CriServerHandler{
                     } catch (JSONException | IOException ex) {
                         Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                break;
+                    break;
                 case "private":
                                
                     for (Session sesh : CriServerHandler.allUsers){
@@ -77,7 +77,14 @@ public class CriServerHandler{
                         client.sendPrivate(sesh, this.json.getJSONObject("data"));                        
                     }
            
-                break;
+                    break;
+                case "groupmessage":
+                    
+                    for (Session sesh : CriServerHandler.allUsers){
+                        client.sendGroup(sesh, json.getJSONObject("daa"));
+                    }
+                    
+                    break;
             }
         } catch (JSONException ex) {
             Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
