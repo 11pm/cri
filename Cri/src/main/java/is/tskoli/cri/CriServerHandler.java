@@ -63,7 +63,7 @@ public class CriServerHandler{
                             
                         }
                         else{
-                            //send {"success": false} to client
+                            //send {"success": falseto client
                             s.getBasicRemote().sendText(new JSONObject().put("type", "login").put("success", false).toString());
                         }
                     } catch (JSONException | IOException ex) {

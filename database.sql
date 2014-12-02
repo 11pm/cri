@@ -97,3 +97,13 @@ begin
 	ON group_users.groupID = groups.id
 	WHERE groups.id = _groupID;
 end $$
+
+create procedure getUserGroups(_userID int)
+begin
+	SELECT groups.* from users
+	INNER JOIN group_users
+	ON users.id = group_users.userID
+	INNER JOIN groups
+	ON group_users.groupID = groups.id
+	WHERE users.id = _userID;
+end $$
