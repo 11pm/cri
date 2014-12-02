@@ -1,0 +1,27 @@
+{{#each users}}
+	{{this.username}
+{{/each}}
+<div class="message-area">
+	
+	<ul class="small-block-grid-1 messages">
+		{{#each messages}}
+			<li>
+				<div class="panel">
+					{{this.sender}}
+					<br>
+					{{this.message}}
+				</div>
+			</li>
+		{{/each}}
+	</ul>
+
+</div>
+
+<form class="messageForm">
+	<input 
+	type="hidden" 
+	class="receiver" 
+	data-receiver="{{user.username}}">
+	<textarea class="message"></textarea>
+	<input type="submit" class="button large" value="Send message">
+</form>

@@ -78,6 +78,22 @@ var cri = {
 		cri.renderTemplate('chat', context);
 
 	},
+
+	clickGroup: function(e){
+		e.preventDefault();
+		var data = $(this).data();
+		console.log(data)
+
+		/*
+		users: all the users in the group
+		*/
+		var context = {
+
+		};
+
+		cri.renderTemplate('group', context);
+	},
+
 	//change menu items
 	changeMenu: function(e){
 		var item = $(this).html();
@@ -194,5 +210,7 @@ $('body').on('submit', '.messageForm', cri.sendMessage);
 
 //sidebar menu
 $('body').on('click', '.options .side-nav li', cri.changeMenu);
+
+$('body').on('click', '.group', cri.clickGroup);
 //make a custom handler for ws onmessage
 websocket.onmessage = cri.onmessage;

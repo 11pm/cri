@@ -83,7 +83,7 @@ public class User extends Database{
             
             String responseMessage = new JSONObject().put("type", "PM").put("message", message).put("sender", sender).put("receiver", receiver).toString();
             User userTo = (User) to.getUserProperties().get("user");
-
+            
             //if he is a friend and he is the person you wanted to talk to
             if(this.isFriend(userTo.username) && receiver.equals(userTo.username)){
                 
