@@ -18,10 +18,10 @@ var cri = {
 	init: function(){
 		//if user has correct credentials
 		if(cri.isAuth()){
-			cri.renderTemplate('main', cri.user);
+			cri.renderTemplate('main', $('.view'), cri.user);
 		}
 		else{
-			cri.renderTemplate('login');
+			cri.renderTemplate('login', $('.view'));
 		}
 
 	},
@@ -75,7 +75,7 @@ var cri = {
 			messages: messages
 		};
 
-		cri.renderTemplate('chat', context);
+		cri.renderTemplate('chat', $('.chat'), context);
 
 	},
 
@@ -92,7 +92,7 @@ var cri = {
 			messages: []
 		};
 
-		cri.renderTemplate('grouptpl', context);
+		cri.renderTemplate('group', $('.chat'), context);
 	},
 
 	//change menu items
@@ -118,7 +118,7 @@ var cri = {
 		$('.list').find("."+item).show();
 	},
 
-	renderTemplate: function(name, context){
+	renderTemplate: function(name, dom, context){
 
 		var templateName = function(name){
 			return cri.templateFolder + name + '.html';
@@ -133,9 +133,9 @@ var cri = {
 
 				//if we have hsb var, use them
 				if(typeof context !== "undefined")
-					$('.'+name).html(template(context));
+					dom.html(template(context));
 				else
-					$('.'+name).html(html);
+					dom.html(html);
 			} 
 		});
 

@@ -22,7 +22,7 @@ import java.util.logging.*;
  */
 @ServerEndpoint("/server")
 public class CriServerHandler{
-    private static Set<Session> allUsers = Collections.synchronizedSet(new HashSet<Session>());
+    private static final Set<Session> allUsers = Collections.synchronizedSet(new HashSet<Session>());
     //the user connected by ws
     private User client;
     //the json from client
