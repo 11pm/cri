@@ -73,10 +73,9 @@ public class User extends Database{
         return false;
     }
     
-    public Boolean isInGroup(String username){
+    public Boolean isInGroup(String user, String group){
         
-        
-        return false;
+        return super.inGroup(user, group);
     }
     
     public void sendPrivate(Session to, JSONObject data){
@@ -106,10 +105,20 @@ public class User extends Database{
     public void sendGroup(Session to, JSONObject data){
         
         try {
-            String group  = data.getString("group");
+            JSONObject group  = data.getJSONObject("group");
             String sender = data.getString("sender");
+            String message = data.getString("message");
             
+            User receiver = (User) to.getUserProperties().get("user");
             
+            String responseMessage = new JSONObject().put("type", "group").put("message", message).put("group", group).toString();
+            
+            //if the person to send to is in the group
+            if(this.isInGroup(receiver.data.get("id"), group.getString("id"))){
+                
+                Message.send(to, responseMessage);
+                
+            }
             
         } catch (JSONException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);

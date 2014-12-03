@@ -132,4 +132,23 @@ class Database{
         return null;
         
     }
+    
+    public Boolean inGroup(String userID, String groupID){
+      
+        try {
+            String query = "CALL inGroup(?, ?)";
+            
+            prepSt = con.prepareStatement(query);
+            prepSt.setString(1, userID);
+            prepSt.setString(2, groupID);
+            rs = prepSt.executeQuery();
+            
+            
+            return rs.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+        
+    }
 }

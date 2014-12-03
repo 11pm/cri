@@ -202,16 +202,22 @@ var cri = {
 
 $(document).ready(cri.init);
 
+var body = $('body');
 //Login submited
-$('body').on('submit', '.loginForm', cri.loginClick);
+body.on('submit', '.loginForm', cri.loginClick);
 
-$('body').on('click', '.friend', cri.clickFriend);
+//Click on friend in sidebar to open chat window
+body.on('click', '.friend', cri.clickFriend);
 
-$('body').on('submit', '.messageForm', cri.sendMessage);
+//Private message
+body.on('submit', '.messageForm', cri.sendMessage);
 
 //sidebar menu
-$('body').on('click', '.options .side-nav li', cri.changeMenu);
+body.on('click', '.options .side-nav li', cri.changeMenu);
 
-$('body').on('click', '.group', cri.clickGroup);
+body.on('click', '.group', cri.clickGroup);
+
+//Group message
+body.on('submit', '.groupForm', cri.sendGroup);
 //make a custom handler for ws onmessage
 websocket.onmessage = cri.onmessage;

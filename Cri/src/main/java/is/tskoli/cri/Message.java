@@ -16,7 +16,7 @@ import org.json.*;
 public class Message {
     
     //Send only to receiver
-    public static void send(Session from, Session to, String message){
+    public static void send(Session to, String message){
         try {
             to.getBasicRemote().sendText(message);
         } catch (IOException ex) {
@@ -27,7 +27,7 @@ public class Message {
     //Send to both send and receiver
     public static void sendToBoth(Session from, Session to, String message){
         try {
-            Message.send(from, to, message);
+            Message.send(to, message);
             from.getBasicRemote().sendText(message);
         } catch (IOException ex) {
             Logger.getLogger(Message.class.getName()).log(Level.SEVERE, null, ex);

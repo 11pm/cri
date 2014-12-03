@@ -98,6 +98,8 @@ begin
 	WHERE groups.id = _groupID;
 end $$
 
+delimiter $$
+
 create procedure getUserGroups(_userID int)
 begin
 	SELECT groups.* from users
@@ -106,4 +108,19 @@ begin
 	INNER JOIN groups
 	ON group_users.groupID = groups.id
 	WHERE users.id = _userID;
+end $$
+
+delimiter ;
+
+delimiter $$
+drop procedure if exists inGroup $$
+
+create procedure inGroup(_userID int, _groupID int)
+begin
+	SELECT * from users
+	INNER JOIN group_users
+	ON users.id = group_users.userID
+	INNER JOIN groups
+	ON group_users.groupID = groups.id
+	WHERE users.id = _userID AND groups.id = _groupID;
 end $$
