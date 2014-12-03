@@ -12,8 +12,17 @@ var cri = {
 		groups: []
 	},
 
-	//keep history of user chat
-	chat: [],
+	/*
+	pm: object of private message 
+	keys: message, receiver, sender
+	------
+	group: object of group message
+	keys: message, sender, group{name, id}
+	*/
+	chat: {
+		pm: [],
+		group: []
+	},
 
 	init: function(){
 		//if user has correct credentials
