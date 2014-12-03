@@ -198,6 +198,13 @@ var cri = {
 		message.text("");
 	},
 
+	sendGroup: function(e){
+
+		e.preventDefault();
+		var groupTo = $('.groupReceiver').data();
+		console.log($(this));
+		console.log($('.groupReceiver').data());
+	},
 };
 
 $(document).ready(cri.init);

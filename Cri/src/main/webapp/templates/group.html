@@ -15,11 +15,12 @@
 
 </div>
 
-<form class="messageForm">
+<form class="groupForm">
 	<input 
 	type="hidden" 
-	class="receiver" 
-	data-receiver="{{user.username}}">
+	class="groupReceiver"
+	data-id="{{group.id}}" 
+	data-group="{{group.name}}">
 	<textarea class="message"></textarea>
 	<input type="submit" class="button large" value="Send message">
 </form>
