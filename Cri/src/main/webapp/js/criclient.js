@@ -30,7 +30,12 @@ var cri = {
 			cri.renderTemplate('main', $('.view'), cri.user);
 		}
 		else{
-			cri.renderTemplate('login', $('.view'));
+			if(localStorage.getItem("username")){
+				cri.renderTemplate('login', $('.view'), {username: localStorage.getItem("username")});				
+			}
+			else{
+				cri.renderTemplate('login', $('.view'), {username: null});			
+			}
 		}
 
 	},
@@ -65,6 +70,10 @@ var cri = {
 		var that = $(this);
 		var username = that.find('.username').val();
 		var password = that.find('.password').val();
+
+		//set user on login
+		localStorage.setItem("username", username);
+
 
 		webClient.send({type: "login", data: { username: username, password: password }});
 	},
@@ -171,15 +180,20 @@ var cri = {
 
 	//Get messages from history for a certain user
 	getChatMessages: function(from){
+		var you = cri.user.username;
 		//a collection of messages to return
 		var messages = [];
+
 		cri.chat.pm.forEach(function(obj, index) {
 
-			//get message from you and to you
-			var sender = obj.sender == from;
-			var receiver = obj.receiver == cri.user.username;
+			//get message from the user to you
+			var sender = obj.sender == from || obj.sender == you;
+			console.log(sender)
+			var receiver = obj.receiver == you || obj.receiver == from;
+			console.log(receiver)
 
-			if(sender || receiver){
+
+			if(sender && receiver){
 				messages.push(obj);
 			}
 
