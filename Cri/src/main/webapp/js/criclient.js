@@ -201,9 +201,11 @@ var cri = {
 	sendGroup: function(e){
 
 		e.preventDefault();
-		var groupTo = $('.groupReceiver').data();
+		var sender  = cri.user.username;
+		var group   = $(this).find('.groupReceiver').data();
+		var message = $(this).find('.message');
 		console.log($(this));
-		console.log($('.groupReceiver').data());
+		console.log(group);
 	},
 };
 
