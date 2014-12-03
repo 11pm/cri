@@ -26,7 +26,7 @@ var handler = {
 	//Handles PM's
 	message: function(response){
 		//add the message to chat history
-		cri.chat.push(response)
+		cri.chat.pm.push(response)
 
 		var chatMsg = cri.chatMessage(response);
 		$(".messages").append(chatMsg);

@@ -173,7 +173,7 @@ var cri = {
 	getChatMessages: function(from){
 		//a collection of messages to return
 		var messages = [];
-		cri.chat.forEach(function(obj, index) {
+		cri.chat.pm.forEach(function(obj, index) {
 
 			//get message from you and to you
 			var sender = obj.sender == from;
