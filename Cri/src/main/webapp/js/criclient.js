@@ -204,8 +204,15 @@ var cri = {
 		var sender  = cri.user.username;
 		var group   = $(this).find('.groupReceiver').data();
 		var message = $(this).find('.message');
-		console.log($(this));
-		console.log(group);
+		
+		webClient.send({type: "group", 
+			data: {
+				message: message.val(),
+				sender: sender,
+				group: group
+			}
+		});
+
 	},
 };
 

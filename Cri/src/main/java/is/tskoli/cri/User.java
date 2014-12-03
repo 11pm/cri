@@ -86,12 +86,12 @@ public class User extends Database{
             String sender   = data.getString("sender");
             String receiver = data.getString("receiver");
             
-            String responseMessage = new JSONObject().put("type", "PM").put("message", message).put("sender", sender).put("receiver", receiver).toString();
+            
             User userTo = (User) to.getUserProperties().get("user");
             
             //if he is a friend and he is the person you wanted to talk to
             if(this.isFriend(userTo.username) && receiver.equals(userTo.username)){
-                
+                String responseMessage = new JSONObject().put("type", "PM").put("message", message).put("sender", sender).put("receiver", receiver).toString();
                 Message.sendToBoth(this.sesh, to, responseMessage);
                 
             }
@@ -111,11 +111,11 @@ public class User extends Database{
             
             User receiver = (User) to.getUserProperties().get("user");
             
-            String responseMessage = new JSONObject().put("type", "group").put("message", message).put("group", group).put("sender", sender).toString();
+            
             
             //if the person to send to is in the group
             if(this.isInGroup(receiver.data.get("id"), group.getString("id"))){
-                
+                String responseMessage = new JSONObject().put("type", "group").put("message", message).put("group", group).put("sender", sender).toString();
                 Message.send(to, responseMessage);
                 
             }
