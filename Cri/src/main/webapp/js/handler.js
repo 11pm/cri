@@ -18,7 +18,7 @@ var handler = {
 			cri.init();
 		}
 		else{
-			console.log("too bad");
+			console.log("too bad!");
 		}
 
 	},
