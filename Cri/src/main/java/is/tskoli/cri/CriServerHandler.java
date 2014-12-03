@@ -81,7 +81,7 @@ public class CriServerHandler{
                 case "groupmessage":
                     
                     for (Session sesh : CriServerHandler.allUsers){
-                        client.sendGroup(sesh, json.getJSONObject("daa"));
+                        client.sendGroup(sesh, this.json.getJSONObject("data"));
                     }
                     
                     break;
