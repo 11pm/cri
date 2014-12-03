@@ -12,6 +12,8 @@ var cri = {
 		groups: []
 	},
 
+	onUser: "",
+
 	/*
 	pm: object of private message 
 	keys: message, receiver, sender
@@ -84,6 +86,7 @@ var cri = {
 		var data = $(this).data();
 		var chat = $('.chat');
 
+		cri.onUser = data.username;
 		//get chat message from the user
 		var messages = cri.getChatMessages(data.username);
 		console.log(messages)
@@ -199,6 +202,23 @@ var cri = {
 
 		});
 		return messages;
+	},
+
+	//append message if on correct user
+	appendChatMessages: function(response){
+		var you = cri.user.username;
+
+		var sender = response.sender == cri.onUser || response.sender == you;
+		console.log(sender)
+		var receiver = response.receiver == you || response.receiver == onUser;
+		console.log(receiver)
+
+
+		if(sender && receiver){
+			var chatMsg = cri.chatMessage(response);
+			$(".messages").append(chatMsg);
+		}
+
 	},
 
 	//send the message server
