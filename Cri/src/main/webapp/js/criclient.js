@@ -205,7 +205,7 @@ var cri = {
 		var group   = $(this).find('.groupReceiver').data();
 		var message = $(this).find('.message');
 		
-		webClient.send({type: "group", 
+		webClient.send({type: "groupmessage", 
 			data: {
 				message: message.val(),
 				sender: sender,
