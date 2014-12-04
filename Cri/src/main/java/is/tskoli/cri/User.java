@@ -111,7 +111,6 @@ public class User extends Database{
             
             User receiver = (User) to.getUserProperties().get("user");
            
-            
             //if the person to send to is in the group
             if(this.isInGroup(receiver.data.get("id"), group.getString("id"))){
                 String responseMessage = new JSONObject().put("type", "group").put("message", message).put("group", group).put("sender", sender).toString();

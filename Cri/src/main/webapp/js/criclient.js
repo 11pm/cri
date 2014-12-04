@@ -259,13 +259,9 @@ var cri = {
 	appendGroupChatMessage: function(response){
 		var you = cri.user.username;
 
-		var sender = response.group.name == cri.onChat || response.sender == you;
-		console.log(sender)
-		var receiver = response.group == you || response.group.name == cri.onChat;
-		console.log(receiver)
-
-
-		if(sender && receiver){
+		var isOpen = response.group.group == cri.onChat;
+	
+		if(isOpen){
 			var chatMsg = cri.chatMessage(response);
 			$(".messages").append(chatMsg);
 		}
