@@ -38,8 +38,6 @@ var cri = {
 		if (window.Notification) {
 			Notification.requestPermission();
 
-			
-
 		}
 
 
@@ -66,7 +64,6 @@ var cri = {
 			Notification.requestPermission();
 		}
 
-		console.log(response)
 		//convert response to JSON
 	    response = JSON.parse(response.data);
 		//the type of response
@@ -100,30 +97,35 @@ var cri = {
 		//set user on login
 		localStorage.setItem("username", username);
 
-
+		//send data to server
 		webClient.send({type: "login", data: { username: username, password: password }});
 	},
 
+	//interaction from client to open chat window, can also be called from notification
 	clickFriend: function(e){
 
 		e.preventDefault();
 
 		var username;
+
 		//if we call from notification
 		if(arguments[1]){
 			username = arguments[1];
+			//focus the window when we click the notification
 			window.focus();
 		}
 		else{
+			//get the username of clicked user from dataset
 			username = $(this).data("username");
 		}
 
+		//set the user
 		cri.onChat = username;
 		
 		//get chat message from the user
 		var messages = cri.getChatMessages(username);
-		console.log(username)
 		
+		//create context for template
 		var context = {
 			user: username,
 			messages: messages
@@ -135,20 +137,22 @@ var cri = {
 
 	notify: function(e){
 		var notification = $(this)[0];
+		//open a chat window with the user you click from the notification
 		cri.clickFriend(e, notification.title);
 	},
 
+	//when a client clicks a group, open it 
 	clickGroup: function(e){
 		e.preventDefault();
+		//get dataset from the group
 		var data = $(this).data();
-		console.log(data)
 
+		//set the current chat
 		cri.onChat = data.name;
 
+		//get the messages from the history
 		var messages = cri.getGroupChatMessages(data.name);
-		/*
-		users: all the users in the group
-		*/
+		
 		var context = {
 			group: data,
 			messages: messages
@@ -180,12 +184,15 @@ var cri = {
 		$('.list').find("."+item).show();
 	},
 
+	//show templates in html
 	renderTemplate: function(name, dom, context){
 
+		//create root path filename
 		var templateName = function(name){
 			return cri.templateFolder + name + '.html';
 		};
 
+		//call the template file, and add it to the html
 		$.ajax({
 			url: templateName(name),
 			type: "GET",
@@ -203,6 +210,7 @@ var cri = {
 
 	},
 
+	//create a chat message to add to any chat window
 	chatMessage: function(msg){
 		var html = "<li>";
 
@@ -222,15 +230,17 @@ var cri = {
 		//a collection of messages to return
 		var messages = [];
 
+		//go through pm's and filter them
 		cri.chat.pm.forEach(function(obj, index) {
 
-			//get message from the user to you
+			
+			//if the messages are from the certain user || you sent them
 			var sender = obj.sender == from || obj.sender == you;
-			console.log(sender)
+			
+			//if the message is to you or the certain user 
 			var receiver = obj.receiver == you || obj.receiver == from;
-			console.log(receiver)
-
-
+			
+			//only add if it went through the filter
 			if(sender && receiver){
 				messages.push(obj);
 			}
