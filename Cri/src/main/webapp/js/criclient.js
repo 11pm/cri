@@ -38,10 +38,13 @@ var cri = {
 		if (window.Notification) {
 			Notification.requestPermission();
 
+			//check ur persmissions m8
+			if(window.Notification.permission !== "granted"){
+				Notification.requestPermission();
+			}
+
 		}
-		else{
-			console.log("install gentoo")
-		}
+
 
 		//if user has correct credentials
 		if(cri.isAuth()){
