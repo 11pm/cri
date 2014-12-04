@@ -305,10 +305,21 @@ var cri = {
 
 	},
 
+	getFriends: function(){
+		var names = [];
+		$('.Contacts li').each(function(e){
+			console.log($(this).data("username"))
+		})
+
+	},
+
 	searchFriends: function(e){
 
 		var searchString = $('#search').val();
-		console.log(searchString)
+		
+		//go through
+		$('.Contacts')
+
 	}
 
 };

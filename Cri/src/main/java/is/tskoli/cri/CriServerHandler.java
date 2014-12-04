@@ -104,6 +104,8 @@ public class CriServerHandler{
         //get details about the user that is closing, set him offline
         User closingUser = (User) peer.getUserProperties().get("user");
         closingUser.online = false;
+        //update the user
+        peer.getUserProperties().put("user", closingUser);
         
         allUsers.remove(peer);
     }
