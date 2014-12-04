@@ -114,12 +114,14 @@ var cri = {
 		console.log(data)
 
 		cri.onChat = data.name;
+
+		var messages = cri.getGroupChatMessages(data.name);
 		/*
 		users: all the users in the group
 		*/
 		var context = {
 			group: data,
-			messages: []
+			messages: messages
 		};
 
 		cri.renderTemplate('group', $('.chat'), context);
@@ -220,15 +222,15 @@ var cri = {
 		var messages = [];
 
 		cri.chat.group.forEach(function(obj, index) {
-
+			console.log(obj);
 			//get message from the user to you
-			var sender = obj.sender == from || obj.sender == you;
-			console.log(sender)
-			var receiver = obj.group == you || obj.group == from;
+			// var sender = obj.sender == from || obj.sender == you;
+			// console.log(sender)
+			var receiver = obj.group.name == cri.onChat || obj.group.name == from;
 			console.log(receiver)
 
 
-			if(sender && receiver){
+			if(receiver){
 				messages.push(obj);
 			}
 
@@ -257,9 +259,9 @@ var cri = {
 	appendGroupChatMessage: function(response){
 		var you = cri.user.username;
 
-		var sender = response.sender == cri.onChat || response.sender == you;
+		var sender = response.group.name == cri.onChat || response.sender == you;
 		console.log(sender)
-		var receiver = response.group == you || response.group == cri.onChat;
+		var receiver = response.group == you || response.group.name == cri.onChat;
 		console.log(receiver)
 
 

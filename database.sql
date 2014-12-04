@@ -115,7 +115,7 @@ delimiter ;
 delimiter $$
 drop procedure if exists inGroup $$
 
-create procedure inGroup(_userID int, _groupID int)
+create procedure inGroup(_userID varchar(1), _groupID varchar(1))
 begin
 	SELECT * from users
 	INNER JOIN group_users
