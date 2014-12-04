@@ -1,9 +1,10 @@
 <h1 class="usernameTitle">{{user}}</h1>
 <div class="message-area">
 	
-	<ul class="small-block-grid-1 messages">
+	<ul class="messages">
 		{{#each messages}}
 			<li>
+				{{this.timestamp}}
 				<div class="panel userMessage">
 					{{this.sender}}
 					<br>
