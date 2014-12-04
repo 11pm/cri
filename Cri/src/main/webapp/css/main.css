@@ -7,6 +7,66 @@ body {
 	margin-bottom: 0 !important;
 }
 
+.login{
+	top: 540px;
+}
+
+.userMessage {
+	margin-bottom: 0 !important;
+	border-radius: 20px;
+	border: 0px;
+	background-color: #FAFAFA;
+	border-bottom: 1px solid #DDD;
+}
+.message-area{
+	height: 70vh;
+}
+.messageForm{
+	height: 20vh;
+}
+
+h1, h2 {
+	text-align: center;
+	color: #BDBDBD;
+	font-family: "calibri";
+	font-weight: 100;
+}
+
+.button{
+	color: white;
+    margin-top: 1em;
+    background: #33363F;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box;
+    padding: 7px 15px 7px 15px;
+}
+
+.button:hover{
+    background: #00BB8E;
+    color: #2F323B;
+}
+
+input#send{
+	text-align: right;
+}
+
+textarea{
+	border: none;
+	border-bottom: #555;
+	box-shadow: none;
+	background-color: #F7F7F7;
+	resize: none;
+	height: 6rem;
+}
+textarea:focus{
+	box-shadow: none;
+}
+
+.login{
+
+}
+
 .left-sidebar, .right-sidebar {
 	height: 100%;
 }
