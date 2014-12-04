@@ -25,9 +25,9 @@ var handler = {
 	
 	//Handles PM's
 	message: function(response){
+		
 		//notification stuff
-		//var body = response.""
-		function sendNotification(){
+		function showNotification(){
 			cri.notification = new Notification(response.sender, {
 				body: response.message
 			});	
@@ -35,7 +35,7 @@ var handler = {
 
 		//if if its not you
 		if (response.sender != cri.user.username){
-			sendNotification();
+			showNotification();
 		}
 
 
