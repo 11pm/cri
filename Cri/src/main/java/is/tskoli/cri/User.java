@@ -24,6 +24,7 @@ public class User extends Database{
     
     //timestamp to return to client
     private String timestamp = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
+    //the user Session
     public Session sesh;
    
     //data to send to client from database
@@ -81,15 +82,17 @@ public class User extends Database{
         return super.inGroup(user, group);
     }
     
+    //Sends a personal message to a certain user
     public void sendPrivate(Session to, JSONObject data){
        
         
         try {
+            //get the data from the client
             String message  = data.getString("message");
             String sender   = data.getString("sender");
             String receiver = data.getString("receiver");
             
-            
+            //get the User object from the session
             User userTo = (User) to.getUserProperties().get("user");
             
             //if he is a friend and he is the person you wanted to talk to
@@ -101,6 +104,8 @@ public class User extends Database{
                     .put("receiver", receiver)
                     .put("timestamp", this.timestamp)
                     .toString();
+                
+                //send the "fake" JSON response to both you and the receiver 
                 Message.sendToBoth(this.sesh, to, responseMessage);
                 
             }
@@ -111,13 +116,16 @@ public class User extends Database{
         
     }
     
+    //sends to everybody in a desired group, checks is the user is correct one
     public void sendGroup(Session to, JSONObject data){
         
         try {
+            //gets the data from the client
             JSONObject group  = data.getJSONObject("group");
             String sender = data.getString("sender");
             String message = data.getString("message");
             
+            //gets the User object from the session
             User receiver = (User) to.getUserProperties().get("user");
            
             //if the person to send to is in the group
@@ -129,6 +137,8 @@ public class User extends Database{
                     .put("sender", sender)
                     .put("timestamp", this.timestamp)
                     .toString();
+                
+                //only send to users in the group
                 Message.send(to, responseMessage);
                 
             }

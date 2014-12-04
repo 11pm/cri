@@ -22,6 +22,7 @@ import java.util.logging.*;
  */
 @ServerEndpoint("/server")
 public class CriServerHandler{
+    //all currect users online
     private static final Set<Session> allUsers = Collections.synchronizedSet(new HashSet<Session>());
     //the user connected by ws
     private User client;
@@ -39,10 +40,12 @@ public class CriServerHandler{
         }
 
         try {
+            //handle what the client sends to us, parse the type
             switch(this.json.getString("type")){
                 //user request server to log him in
                 case "login":
-
+                    
+                    //get the data from client
                     this.json = this.json.getJSONObject("data");
                     String username = (String) this.json.get("username");
                     String password = (String) this.json.get("password");
@@ -59,27 +62,49 @@ public class CriServerHandler{
                             List<Map<String, String>> friends = client.friends;
                             Map<String, String> details = client.data;
                             List<Map<String, String>>  groups = client.groups;
-                            s.getBasicRemote().sendText(new JSONObject().put("type", "login").put("success", true).put("details", details).put("friends", friends).put("groups", groups).toString());
+                            
+                            //send the response to the user that requested it 
+                            s.getBasicRemote().sendText(
+                                new JSONObject()
+                                    .put("type", "login")
+                                    .put("success", true)
+                                    .put("details", details)
+                                    .put("friends", friends)
+                                    .put("groups", groups)
+                                    .toString()
+                            );
                             
                         }
                         else{
+                            
                             //send {"success": falseto client
-                            s.getBasicRemote().sendText(new JSONObject().put("type", "login").put("success", false).toString());
+                            s.getBasicRemote().sendText(
+                                new JSONObject()
+                                    .put("type", "login")
+                                    .put("success", false)
+                                    .toString()
+                            );
+                            
                         }
                     } catch (JSONException | IOException ex) {
                         Logger.getLogger(CriServerHandler.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
+                    
+                //handle private messages from the client
                 case "private":
-                               
+                    
+                    //go through all users and check if they are the correct ones to send to
                     for (Session sesh : CriServerHandler.allUsers){
                         //send message to correct user
                         client.sendPrivate(sesh, this.json.getJSONObject("data"));                        
                     }
            
                     break;
+                //handle group messages from the client
                 case "groupmessage":
                     
+                    //go through all users and check if they are the correct ones to send to
                     for (Session sesh : CriServerHandler.allUsers){
                         client.sendGroup(sesh, this.json.getJSONObject("data"));
                     }
@@ -93,8 +118,11 @@ public class CriServerHandler{
         
     }
     
+    //when a user opens the app in browser we set the session for later use
     @OnOpen
     public void onOpen (Session peer) {
+        
+        //and add him to the online user list
         allUsers.add(peer);
     }
 
