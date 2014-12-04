@@ -204,18 +204,12 @@ var cri = {
 	},
 
 	chatMessage: function(msg){
-		var html = "";
-
-		//if its from you
-		if(cri.user.username == msg.sender)
-			html += "<li class='success'>";
-		else
-			html += "<li class='danger'>";
+		var html = "<li>";
 
 		html += "<div class='panel'>";
-		html += msg.sender;
-		html += "<br>";
-		html += msg.message;
+		html += "<h3>" + msg.sender + " - <span class='subheader'>" + msg.timestamp + "</span></h3>";
+		html += "<hr>";
+		html += "<p>" + msg.message + "</p>";
 		html += "</div>";
 
 		html += "</li>";
@@ -256,7 +250,8 @@ var cri = {
 			//get message from the user to you
 			// var sender = obj.sender == from || obj.sender == you;
 			// console.log(sender)
-			var receiver = obj.group.name == cri.onChat || obj.group.name == from;
+			console.log(obj.group)
+			var receiver = obj.group.group == cri.onChat || obj.group.group == from;
 			console.log(receiver)
 
 

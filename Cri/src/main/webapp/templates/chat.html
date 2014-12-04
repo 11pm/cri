@@ -1,14 +1,14 @@
 <h1 class="usernameTitle">{{user}}</h1>
 <div class="message-area">
 	
-	<ul class="messages">
+	<ul class="small-block-grid-1 messages">
 		{{#each messages}}
 			<li>
-				{{this.timestamp}}
+
 				<div class="panel userMessage">
-					{{this.sender}}
-					<br>
-					{{this.message}}
+					<h3>{{this.sender}} - <span class="subheader">{{this.timestamp}}</span></h3>
+					<hr>
+					<p>{{this.message}}</p>
 				</div>
 			</li>
 		{{/each}}

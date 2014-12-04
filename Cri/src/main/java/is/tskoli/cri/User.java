@@ -122,7 +122,13 @@ public class User extends Database{
            
             //if the person to send to is in the group
             if(this.isInGroup(receiver.data.get("id"), group.getString("id"))){
-                String responseMessage = new JSONObject().put("type", "group").put("message", message).put("group", group).put("sender", sender).toString();
+                String responseMessage = new JSONObject()
+                    .put("type", "group")
+                    .put("message", message)
+                    .put("group", group)
+                    .put("sender", sender)
+                    .put("timestamp", this.timestamp)
+                    .toString();
                 Message.send(to, responseMessage);
                 
             }
