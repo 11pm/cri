@@ -5,30 +5,27 @@ body {
 
 .panel {
 	margin-bottom: 0 !important;
+	border-radius: 20px;
+	border: 0px;
+	background-color: #FAFAFA;
+	border-bottom: 1px solid #DDD;
 }
 
 .login{
 	top: 540px;
 }
 
-.userMessage {
-	margin-bottom: 0 !important;
-	border-radius: 20px;
-	border: 0px;
-	background-color: #FAFAFA;
-	border-bottom: 1px solid #DDD;
-}
 .message-area{
-	height: 70vh;
+	height: 85vh;
 }
-.messageForm{
-	height: 20vh;
+.messageForm, input#send, textarea{
+	height: 5vh;
 }
 
 h1, h2 {
 	text-align: center;
 	color: #BDBDBD;
-	font-family: "calibri";
+	font-family: "Open Sans";
 	font-weight: 100;
 }
 
@@ -48,20 +45,19 @@ h1, h2 {
 }
 
 input#send{
-	text-align: right;
+	margin-top: 0px;
+	border-radius: none;
 }
 
 textarea{
 	border: none;
-	border-bottom: #555;
+	border-bottom:1px solid #bababa;
 	box-shadow: none;
 	background-color: #F7F7F7;
 	resize: none;
-	height: 6rem;
 }
 textarea:focus{
-	box-shadow: none;
-}
+	box-shadow: none;}
 
 .login{
 
