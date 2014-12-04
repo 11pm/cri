@@ -1,6 +1,6 @@
 /*
 @name: Handler
-@author: 11pm
+@author: 11pm, halldor32
 @role: handles websocket responses
 */
 var handler = {
@@ -28,12 +28,14 @@ var handler = {
 		//add the message to chat history
 		cri.chat.pm.push(response)
 		console.log(response)
-		cri.appendChatMessages(response);
+		cri.appendpmChatMessage(response);
 	},
 
 	//Handles group messages
 	groupmessage: function(response){
-
+		cri.chat.group.push(response)
+		console.log(response)
+		cri.appendGroupChatMessage(response);
 	}
 
 };

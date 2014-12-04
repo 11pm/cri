@@ -1,3 +1,8 @@
+/*
+@name: Cri
+@author: 11pm, halldor32
+@role: Client that handles user actions
+*/
 
 var cri = {
 	templateFolder: 'templates/',
@@ -12,7 +17,7 @@ var cri = {
 		groups: []
 	},
 
-	onUser: "",
+	onChat: "",
 
 	/*
 	pm: object of private message 
@@ -86,7 +91,7 @@ var cri = {
 		var data = $(this).data();
 		var chat = $('.chat');
 
-		cri.onUser = data.username;
+		cri.onChat = data.username;
 		//get chat message from the user
 		var messages = cri.getChatMessages(data.username);
 		console.log(messages)
@@ -105,6 +110,7 @@ var cri = {
 		var data = $(this).data();
 		console.log(data)
 
+		cri.onChat = data.name;
 		/*
 		users: all the users in the group
 		*/
@@ -204,13 +210,53 @@ var cri = {
 		return messages;
 	},
 
+	//Get messages from history for a certain user
+	getGroupChatMessages: function(from){
+		var you = cri.user.username;
+		//a collection of messages to return
+		var messages = [];
+
+		cri.chat.group.forEach(function(obj, index) {
+
+			//get message from the user to you
+			var sender = obj.sender == from || obj.sender == you;
+			console.log(sender)
+			var receiver = obj.group == you || obj.group == from;
+			console.log(receiver)
+
+
+			if(sender && receiver){
+				messages.push(obj);
+			}
+
+		});
+		return messages;
+	},
+
 	//append message if on correct user
-	appendChatMessages: function(response){
+	appendpmChatMessage: function(response){
 		var you = cri.user.username;
 
 		var sender = response.sender == cri.onUser || response.sender == you;
 		console.log(sender)
 		var receiver = response.receiver == you || response.receiver == onUser;
+		console.log(receiver)
+
+
+		if(sender && receiver){
+			var chatMsg = cri.chatMessage(response);
+			$(".messages").append(chatMsg);
+		}
+
+	},
+
+	//append message if on correct user
+	appendGroupChatMessage: function(response){
+		var you = cri.user.username;
+
+		var sender = response.sender == cri.onChat || response.sender == you;
+		console.log(sender)
+		var receiver = response.group == you || response.group == onChat;
 		console.log(receiver)
 
 
@@ -257,6 +303,13 @@ var cri = {
 		});
 
 	},
+
+	searchFriends: function(e){
+
+		var searchString = $('#search').val();
+		console.log(searchString)
+	}
+
 };
 
 $(document).ready(cri.init);
@@ -278,5 +331,9 @@ body.on('click', '.group', cri.clickGroup);
 
 //Group message
 body.on('submit', '.groupForm', cri.sendGroup);
+
+//search friends
+body.on('keyup', '#search', cri.searchFriends);
+
 //make a custom handler for ws onmessage
 websocket.onmessage = cri.onmessage;
