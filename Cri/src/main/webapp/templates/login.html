@@ -1,6 +1,7 @@
 <div class="large-4 medium-6 columns large-centered medium-centered">
 	<div class="panel login">
 		<h1>Login</h1>
+		<div class="login-error"></div>
 		<form class="loginForm">
 			{{#if username}}
 				<input 
@@ -15,8 +16,9 @@
 				class="username" >
 			{{/if}}
 			
-			<input type="password" class="password" value="password">
+			<input type="password" class="password">
 			<input type="submit" class="button radius center">
 		</form>
+		
 	</div>
 </div>

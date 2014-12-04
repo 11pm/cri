@@ -10,7 +10,8 @@ var handler = {
 
 		//login worked
 		if(response.success === true){
-
+			
+			//set user info
 			cri.user         = response.details;
 			cri.user.friends = response.friends;
 			cri.user.groups  = response.groups;
@@ -18,7 +19,8 @@ var handler = {
 			cri.init();
 		}
 		else{
-			console.log("too bad!");
+			//show error message
+			$('.login-error').html("<span class='error'>Login failed</span>");
 		}
 
 	},
