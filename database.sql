@@ -33,6 +33,7 @@ create table group_users(
 
 INSERT INTO users (username, user_password) VALUES ("11pm", "password");
 INSERT INTO users (username, user_password) VALUES ("halldor32", "password");
+INSERT INTO users (username, user_password) VALUES ("aalex315","password");
 
 INSERT INTO friendlist (userID, friendID) values (1, 2);
 INSERT INTO friendlist (userID, friendID) values (2, 1);
@@ -115,7 +116,7 @@ delimiter ;
 delimiter $$
 drop procedure if exists inGroup $$
 
-create procedure inGroup(_userID int, _groupID int)
+create procedure inGroup(_userID varchar(1), _groupID varchar(1))
 begin
 	SELECT * from users
 	INNER JOIN group_users
