@@ -31,7 +31,18 @@ var cri = {
 		group: []
 	},
 
+	notification: null,
+
 	init: function(){
+		//if user has notification api in browser
+		if (window.Notification) {
+			Notification.requestPermission();
+
+		}
+		else{
+			console.log("install gentoo")
+		}
+
 		//if user has correct credentials
 		if(cri.isAuth()){
 			cri.renderTemplate('main', $('.view'), cri.user);
