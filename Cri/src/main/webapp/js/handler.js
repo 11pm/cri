@@ -25,6 +25,20 @@ var handler = {
 	
 	//Handles PM's
 	message: function(response){
+		//notification stuff
+		//var body = response.""
+		function sendNotification(){
+			cri.notification = new Notification(response.sender, {
+				body: response.message
+			});	
+		}
+
+		//if if its not you
+		if (response.sender != cri.user.username){
+			sendNotification();
+		}
+
+
 		//add the message to chat history
 		cri.chat.pm.push(response)
 		console.log(response)
