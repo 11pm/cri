@@ -38,10 +38,7 @@ var cri = {
 		if (window.Notification) {
 			Notification.requestPermission();
 
-			//check ur persmissions m8
-			if(window.Notification.permission !== "granted"){
-				Notification.requestPermission();
-			}
+			
 
 		}
 
@@ -63,12 +60,17 @@ var cri = {
 
 	//handle responses from server
 	onmessage: function(response){
+
+		//check ur permissions m8
+		if(window.Notification.permission !== "granted"){
+			Notification.requestPermission();
+		}
+
 		console.log(response)
 		//convert response to JSON
-		response = JSON.parse(response.data);
-		var type = response.type;
+	    response = JSON.parse(response.data);
 		//the type of response
-		switch(type){
+		switch(response.type){
 			case "login":
 				handler.login(response);
 				break;

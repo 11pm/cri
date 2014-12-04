@@ -25,10 +25,6 @@ var handler = {
 	
 	//Handles PM's
 	message: function(response){
-
-		
-		console.log(cri.onChat);
-		console.log(response)
 		//notification stuff
 		function showNotification(){
 			cri.notification = new Notification(response.sender, {
@@ -50,15 +46,15 @@ var handler = {
 
 
 		//add the message to chat history
-		cri.chat.pm.push(response)
-		console.log(response)
+		cri.chat.pm.push(response);
+		//do something with the server response
 		cri.appendpmChatMessage(response);
 	},
 
 	//Handles group messages
 	groupmessage: function(response){
-		cri.chat.group.push(response)
-		console.log(response)
+		cri.chat.group.push(response);
+		//process the group message
 		cri.appendGroupChatMessage(response);
 	}
 

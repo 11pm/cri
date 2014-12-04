@@ -5,6 +5,7 @@
  */
 package is.tskoli.cri;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,15 +22,17 @@ public class User extends Database{
     public String password;
     public Boolean online = true;
     
+    //timestamp to return to client
+    private String timestamp = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
     public Session sesh;
-    
+   
+    //data to send to client from database
     public Map<String, String> data = new HashMap<>();
-    
     public List<Map<String, String>> friends = new ArrayList<>();
     public List<User> userFriends = new ArrayList<>();
     public List<Session> sessionFriends = new ArrayList<>();
     public List<Map<String, String>> groups = new ArrayList<>();
-    //public String f;
+    
     
     public User(String username, String password, Session s){
         try{
@@ -91,7 +94,13 @@ public class User extends Database{
             
             //if he is a friend and he is the person you wanted to talk to
             if(this.isFriend(userTo.username) && receiver.equals(userTo.username)){
-                String responseMessage = new JSONObject().put("type", "PM").put("message", message).put("sender", sender).put("receiver", receiver).toString();
+                String responseMessage = new JSONObject()
+                    .put("type", "PM")
+                    .put("message", message)
+                    .put("sender", sender)
+                    .put("receiver", receiver)
+                    .put("timestamp", this.timestamp)
+                    .toString();
                 Message.sendToBoth(this.sesh, to, responseMessage);
                 
             }
