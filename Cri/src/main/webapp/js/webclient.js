@@ -1,27 +1,29 @@
 /* 
  @author: 11pm
  @role: Handle all interaction with server side stuff
- @Todo: everything
  */
 
 var wsUri = "ws://" + document.location.host + document.location.pathname + "server";
 
 var websocket = new WebSocket(wsUri);
-var wsMessage;
 
 websocket.onerror = function(response){
-    console.log(response);
+    
 };
 
 websocket.onopen = function(response){
-	console.log(response)
+	
 };
 
 var webClient = {
+
+	//sends requests to the server and check if the server is ready
 	send: function (message, callback) {
 		
+		//check every 1 second if websocket is ready for use
     	this.waitForConnection(function () {
-        	console.log('sending to server...')
+        	
+        	//send "fake" JSON string to server to do stuff with
         	websocket.send(JSON.stringify(message));
 	        
 	    }, 1000);
