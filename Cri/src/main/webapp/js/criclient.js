@@ -367,8 +367,5 @@ body.on('click', '.group', cri.clickGroup);
 //Group message
 body.on('submit', '.groupForm', cri.sendGroup);
 
-//search friends
-body.on('keyup', '#search', cri.searchFriends);
-
 //make a custom handler for ws onmessage
 websocket.onmessage = cri.onmessage;
