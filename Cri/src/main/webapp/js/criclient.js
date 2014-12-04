@@ -105,21 +105,35 @@ var cri = {
 	clickFriend: function(e){
 
 		e.preventDefault();
-		var data = $(this).data();
-		var chat = $('.chat');
 
-		cri.onChat = data.username;
+		var username;
+		//if we call from notification
+		if(arguments[1]){
+			username = arguments[1];
+			window.focus();
+		}
+		else{
+			username = $(this).data("username");
+		}
+
+		cri.onChat = username;
+		
 		//get chat message from the user
-		var messages = cri.getChatMessages(data.username);
-		console.log(messages)
+		var messages = cri.getChatMessages(username);
+		console.log(username)
 		
 		var context = {
-			user: data,
+			user: username,
 			messages: messages
 		};
 
 		cri.renderTemplate('chat', $('.chat'), context);
 
+	},
+
+	notify: function(e){
+		var notification = $(this)[0];
+		cri.clickFriend(e, notification.title);
 	},
 
 	clickGroup: function(e){

@@ -25,6 +25,8 @@ var handler = {
 	
 	//Handles PM's
 	message: function(response){
+
+		
 		console.log(cri.onChat);
 		console.log(response)
 		//notification stuff
@@ -32,6 +34,12 @@ var handler = {
 			cri.notification = new Notification(response.sender, {
 				body: response.message
 			});	
+			
+			//create notification evt listener dynamicly
+			cri.notification.onclick = cri.notify;
+
+			//play audio
+			$('.notification-sound')[0].play();
 
 		}
 

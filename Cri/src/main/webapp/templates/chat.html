@@ -1,4 +1,4 @@
-<h1 class="usernameTitle">{{user.username}}</h1>
+<h1 class="usernameTitle">{{user}}</h1>
 <div class="message-area">
 	
 	<ul class="small-block-grid-1 messages">
@@ -19,7 +19,7 @@
 	<input 
 	type="hidden" 
 	class="receiver" 
-	data-receiver="{{user.username}}">
+	data-receiver="{{user}}">
 	<textarea class="message small-10 columns"></textarea>
 	<input type="submit" class="button radius small-2 columns" id="send" value="Send">
 </form>
