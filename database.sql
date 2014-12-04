@@ -33,6 +33,7 @@ create table group_users(
 
 INSERT INTO users (username, user_password) VALUES ("11pm", "password");
 INSERT INTO users (username, user_password) VALUES ("halldor32", "password");
+INSERT INTO users (username, user_password) VALUES ("aalex315","password");
 
 INSERT INTO friendlist (userID, friendID) values (1, 2);
 INSERT INTO friendlist (userID, friendID) values (2, 1);
