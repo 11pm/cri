@@ -25,16 +25,18 @@ var handler = {
 	
 	//Handles PM's
 	message: function(response){
-		
+		console.log(cri.onChat);
+		console.log(response)
 		//notification stuff
 		function showNotification(){
 			cri.notification = new Notification(response.sender, {
 				body: response.message
 			});	
+
 		}
 
-		//if if its not you
-		if (response.sender != cri.user.username){
+		//if if its not you and the chat window is not open
+		if (response.sender != cri.onChat && response.sender != cri.user.username){
 			showNotification();
 		}
 
