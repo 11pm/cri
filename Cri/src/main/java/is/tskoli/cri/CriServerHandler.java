@@ -114,8 +114,5 @@ public class CriServerHandler{
     public String onError(Throwable t) {
         return t.getMessage();
     }
-    
-    public static void main(String[] args){
-        System.out.println("Hello world");
-    }
+  
 }
