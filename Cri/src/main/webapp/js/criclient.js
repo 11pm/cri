@@ -61,6 +61,9 @@ var cri = {
 			case "PM":
 				handler.message(response);
 				break;
+			case "group":
+				handler.groupmessage(response);
+				break;
 			default:
 				console.log(response)
 				break;
@@ -236,10 +239,10 @@ var cri = {
 	//append message if on correct user
 	appendpmChatMessage: function(response){
 		var you = cri.user.username;
-
-		var sender = response.sender == cri.onUser || response.sender == you;
+		console.log(cri.onChat);
+		var sender = response.sender == cri.onChat || response.sender == you;
 		console.log(sender)
-		var receiver = response.receiver == you || response.receiver == onUser;
+		var receiver = response.receiver == you || response.receiver == cri.onChat;
 		console.log(receiver)
 
 
@@ -256,7 +259,7 @@ var cri = {
 
 		var sender = response.sender == cri.onChat || response.sender == you;
 		console.log(sender)
-		var receiver = response.group == you || response.group == onChat;
+		var receiver = response.group == you || response.group == cri.onChat;
 		console.log(receiver)
 
 
