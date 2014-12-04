@@ -226,6 +226,7 @@ var cri = {
 
 	//Get messages from history for a certain user
 	getChatMessages: function(from){
+		//the username of the logged in user
 		var you = cri.user.username;
 		//a collection of messages to return
 		var messages = [];
@@ -233,7 +234,6 @@ var cri = {
 		//go through pm's and filter them
 		cri.chat.pm.forEach(function(obj, index) {
 
-			
 			//if the messages are from the certain user || you sent them
 			var sender = obj.sender == from || obj.sender == you;
 			
@@ -249,22 +249,19 @@ var cri = {
 		return messages;
 	},
 
-	//Get messages from history for a certain user
+	//Get messages from history for a certain chat group
 	getGroupChatMessages: function(from){
-		var you = cri.user.username;
+		
 		//a collection of messages to return
 		var messages = [];
 
+		//filter groups
 		cri.chat.group.forEach(function(obj, index) {
-			console.log(obj);
-			//get message from the user to you
-			// var sender = obj.sender == from || obj.sender == you;
-			// console.log(sender)
-			console.log(obj.group)
+			
+			//if the group chat window is the correct group || the group is the certain group
 			var receiver = obj.group.group == cri.onChat || obj.group.group == from;
-			console.log(receiver)
-
-
+			
+			//if it went through the filter
 			if(receiver){
 				messages.push(obj);
 			}
@@ -276,13 +273,14 @@ var cri = {
 	//append message if on correct user
 	appendpmChatMessage: function(response){
 		var you = cri.user.username;
-		console.log(cri.onChat);
+		
+		//if the sender is the selected chat window or you are the sender
 		var sender = response.sender == cri.onChat || response.sender == you;
-		console.log(sender)
+		
+		//if you are the receiver or the receiver is the selected chat window
 		var receiver = response.receiver == you || response.receiver == cri.onChat;
-		console.log(receiver)
 
-
+		//if it passes filtering, add it to the chat window
 		if(sender && receiver){
 			var chatMsg = cri.chatMessage(response);
 			$(".messages").append(chatMsg);
@@ -290,12 +288,14 @@ var cri = {
 
 	},
 
-	//append message if on correct user
+	//append message if on correct group
 	appendGroupChatMessage: function(response){
 		var you = cri.user.username;
 
+		//if the correct group is open
 		var isOpen = response.group.group == cri.onChat;
 	
+		//add the messages
 		if(isOpen){
 			var chatMsg = cri.chatMessage(response);
 			$(".messages").append(chatMsg);
@@ -307,6 +307,8 @@ var cri = {
 	sendMessage: function(e){
 		
 		e.preventDefault();
+
+		//data we want to send
 		var sender = cri.user.username;
 		var receiver = $(this).find('.receiver').data("receiver");
 		var message = $(this).find('.message');
@@ -320,16 +322,19 @@ var cri = {
 			}
 		});
 		//Clear the box
-		message.text("");
+		message.val("");
 	},
 
 	sendGroup: function(e){
 
 		e.preventDefault();
+
+		//data we want to send
 		var sender  = cri.user.username;
 		var group   = $(this).find('.groupReceiver').data();
 		var message = $(this).find('.message');
 		
+		//send a group messages to the server, the server send to the correct users
 		webClient.send({type: "groupmessage", 
 			data: {
 				message: message.val(),
@@ -339,38 +344,6 @@ var cri = {
 		});
 
 	},
-
-	getFriends: function(){
-		var names = [];
-		$('.Contacts li').each(function(e){
-			console.log($(this).data("username"))
-		})
-
-	},
-
-	searchFriends: function(e){
-
-		var searchString = $('#search').val();
-		
-		//go through
-		$('.Contacts')
-
-	},
-
-	unixToTime: function(unix){
-		var date = new Date(unix*1000);
-		// hours part from the timestamp
-		var hours = date.getHours();
-		// minutes part from the timestamp
-		var minutes = "0" + date.getMinutes();
-		// seconds part from the timestamp
-		var seconds = "0" + date.getSeconds();
-
-		// will display time in 10:30:23 format
-		var formattedTime = hours + ':' + minutes.substr(minutes.length-2) + ':' + seconds.substr(seconds.length-2);
-
-		return formattedTime;
-	}
 
 };
 
