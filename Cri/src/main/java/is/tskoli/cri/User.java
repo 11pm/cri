@@ -22,8 +22,6 @@ public class User extends Database{
     public String password;
     public Boolean online = true;
     
-    //timestamp to return to client
-    private String timestamp = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
     //the user Session
     public Session sesh;
    
@@ -102,7 +100,7 @@ public class User extends Database{
                     .put("message", message)
                     .put("sender", sender)
                     .put("receiver", receiver)
-                    .put("timestamp", this.timestamp)
+                    .put("timestamp", this.getTimestamp())
                     .toString();
                 
                 //send the "fake" JSON response to both you and the receiver 
@@ -135,7 +133,7 @@ public class User extends Database{
                     .put("message", message)
                     .put("group", group)
                     .put("sender", sender)
-                    .put("timestamp", this.timestamp)
+                    .put("timestamp", this.getTimestamp())
                     .toString();
                 
                 //only send to users in the group
@@ -146,7 +144,11 @@ public class User extends Database{
         } catch (JSONException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
+    
+    private String getTimestamp(){
+        return new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
+    }
+        
     
 }
