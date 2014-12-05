@@ -457,14 +457,17 @@ var cri = {
 		canvas.width   = x;
 		canvas.height  = y;
 
-		console.log(letter)
 		//get a random color for bg
-		canvas.getContext("2d").font = "20px Open Sans";
+		canvas.getContext("2d").font = "35px Open Sans";
+		//add a color to the rect
 		canvas.getContext("2d").fillStyle = colors[Math.floor(Math.random()*colors.length)];
+		//create the rect
 		canvas.getContext("2d").fillRect(0,0,x,y);
+		//add text color
 		canvas.getContext("2d").fillStyle = "white";
-
-		canvas.getContext("2d").fillText(letter, 0, 0);
+		//show the text
+		canvas.getContext("2d").fillText(letter, 11, 34);
+		
 		$(dom).html(canvas);
 	}
 
