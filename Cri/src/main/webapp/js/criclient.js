@@ -326,8 +326,11 @@ var cri = {
 			var username = $(this).data("username");
 			var unread = response.sender == username;
 			
-			//send the value of span.pill
-			cri.createPill($(this).find(".pill").html());
+			if (unread){
+				//send the value of span.pill
+				cri.createPill($(this).find(".pill"));
+			}
+			
 		});
 
 	},
@@ -335,10 +338,20 @@ var cri = {
 	//create the unread pill
 	createPill: function(dom){
 		
-		var totalUnread = dom;
+		var totalUnread = dom.html();
 		//if there is no pill, create one with 1 as value
-		console.log(totalUnread)
+		if(totalUnread.length === 0){
+			dom.html("1");
+		}
 		//if there is a pill, increment it by one
+		else{
+			//get the last number
+			var newNumber = parseInt(totalUnread);
+			//increment by one
+			newNumber+=1;
+			//display the new number
+			dom.html(newNumber);
+		}
 	},
 
 	//Get messages from history for a certain user
