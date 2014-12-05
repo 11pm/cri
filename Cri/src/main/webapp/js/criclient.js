@@ -326,16 +326,18 @@ var cri = {
 			var username = $(this).data("username");
 			var unread = response.sender == username;
 			
-			cri.createPill($(this));
+			//send the value of span.pill
+			cri.createPill($(this).find(".pill").html());
 		});
 
 	},
 
 	//create the unread pill
 	createPill: function(dom){
-		console.log(dom)
+		
+		var totalUnread = dom;
 		//if there is no pill, create one with 1 as value
-
+		console.log(totalUnread)
 		//if there is a pill, increment it by one
 	},
 
