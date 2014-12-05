@@ -18,7 +18,7 @@ var cri = {
 	},
 
 	onChat: "",
-
+	isMobile: false,
 	/*
 	pm: object of private message 
 	keys: message, receiver, sender
@@ -35,6 +35,7 @@ var cri = {
 	notification: null,
 
 	init: function(){
+		cri.handleResize();
 		//if user has notification api in browser
 		if (window.Notification) {
 			Notification.requestPermission();
@@ -532,7 +533,23 @@ var cri = {
 		canvas.getContext("2d").fillText(letter, 11, 34);
 		
 		$(dom).html(canvas);
-	}
+	},
+
+	handleResize: function(){
+		var isMobile = $(window).width() < 640;
+		cri.isMobile = isMobile;
+
+		if(isMobile){
+			//if user in mobile click a user or a group take him there
+			$('body').on('click', '.side-nav li', function(e){
+				body.animate({
+					scrollTop: 0
+				}, 300);
+			});
+		}
+
+	},
+
 
 };
 
@@ -558,3 +575,8 @@ body.on('submit', '.groupForm', cri.sendGroup);
 
 //make a custom handler for ws onmessage
 websocket.onmessage = cri.onmessage;
+
+$(window).resize(function(){
+	cri.isMobile = $(window).width() < 640;
+	cri.handleResize();
+});

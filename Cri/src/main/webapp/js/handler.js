@@ -17,11 +17,21 @@ var handler = {
 			cri.user.groups  = response.groups;
 
 			cri.init();
+
+			//if we log in as a mobile user go to menu
+			if(cri.isMobile){
+				$('body').animate({
+					scrollTop: $('.left-sidebar').offset().top
+				}, 300);
+			}
+
 		}
 		else{
 			//show error message
 			$('.login-error').html("<span class='error'>Login failed</span>");
 		}
+
+
 
 	},
 	
