@@ -10,13 +10,6 @@ body {
   background: url(../img/green-bg.png);
   background-repeat: repeat; }
 
-.panel {
-  margin-bottom: 0 !important;
-  border-radius: 20px;
-  border: 0px;
-  background-color: #FAFAFA;
-  border-bottom: 1px solid #DDD; }
-
 h1, h2 {
   text-align: center;
   color: #BDBDBD;
@@ -180,6 +173,13 @@ textarea {
     left: 0;
     right: 0;
     width: 100%; }
+  .outer-chat .messages li .panel {
+    border: 0;
+    border-radius: 4%; }
+    .outer-chat .messages li .panel.fromYou {
+      background: #E5F7FD; }
+    .outer-chat .messages li .panel.toYou {
+      background: #C7EDFC; }
 
 .size-12 {
   font-size: 12px; }
