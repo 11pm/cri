@@ -381,6 +381,7 @@ var cri = {
 	//send the message server
 	sendMessage: function(e){
 
+		e.preventDefault();
 		//data we want to send
 		var sender = cri.user.username;
 		var receiver = $(this).find('.receiver').data("receiver");
@@ -411,7 +412,7 @@ var cri = {
 		var sender  = cri.user.username;
 		var group   = $(this).find('.groupReceiver').data("group");
 		var message = $(this).find('.message');
-		console.log("group")
+		
 		//send a group messages to the server, the server send to the correct users
 		webClient.send({type: "groupmessage", 
 			data: {
@@ -435,13 +436,7 @@ body.on('submit', '.loginForm', cri.loginClick);
 body.on('click', '.friend', cri.clickFriend);
 
 //Private message
-body.on('keyup', '.messageForm', function(e){
-	//user pressed enter
-	console.log($(this))
-	if(e.which == 13){
-		cri.sendMessage($(this));
-	}
-});
+body.on('submit', '.messageForm', cri.sendMessage);
 
 //sidebar menu
 body.on('click', '.options .side-nav li', cri.changeMenu);

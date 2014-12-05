@@ -162,8 +162,7 @@ input#send {
   .outer-chat .parent {
     height: 100%; }
   .outer-chat .message-area {
-    height: 69%;
-    overflow-y: scroll; }
+    height: 69%; }
     @media (min-width: 40.063em) {
       .outer-chat .message-area {
         height: 79%; } }
@@ -178,6 +177,15 @@ input#send {
     left: 0;
     right: 0;
     width: 100%; }
+    .outer-chat .messageForm .button, .outer-chat .groupForm .button {
+      color: #33363F;
+      background: #00BB8E;
+      height: 100%;
+      margin-bottom: 0;
+      padding: 2px; }
+      .outer-chat .messageForm .button:hover, .outer-chat .groupForm .button:hover {
+        background: #00a27b;
+        color: #2F323B; }
     .outer-chat .messageForm textarea, .outer-chat .groupForm textarea {
       background: #E5F7FD;
       border: none;

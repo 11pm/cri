@@ -251,7 +251,6 @@ input#send{
 
 	.message-area {
 		height: 69%;
-		overflow-y: scroll;
 		@media(min-width: $break-medium){
 			height: 79%;
 		}
@@ -269,6 +268,18 @@ input#send{
 		left: 0;
 		right: 0;
 		width: 100%;
+
+		.button{
+			color: $light-grey;
+			background: $green;
+			height: 100%;
+			margin-bottom: 0;
+			padding: 2px;
+			&:hover{
+				background: darken($green, 5%);
+				color: #2F323B;
+			}
+		}
 
 		textarea{
 			background: #E5F7FD;
