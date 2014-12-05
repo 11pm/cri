@@ -20,15 +20,6 @@ input#send {
   margin-top: 0px;
   border-radius: none; }
 
-textarea {
-  border: none;
-  border-bottom: 1px solid #bababa;
-  box-shadow: none;
-  background-color: #F7F7F7;
-  resize: none; }
-  textarea:focus {
-    box-shadow: none; }
-
 .left-sidebar, .right-sidebar {
   height: 100%; }
 
@@ -165,17 +156,41 @@ textarea {
   .outer-chat h1 {
     color: #33363F;
     margin-top: 0; }
+    .outer-chat h1.usernameTitle {
+      border-bottom: 1% solid #ccc;
+      height: 10%; }
+  .outer-chat .parent {
+    height: 100%; }
   .outer-chat .message-area {
-    max-height: 80vh; }
+    height: 69%;
+    overflow-y: scroll; }
+    @media (min-width: 40.063em) {
+      .outer-chat .message-area {
+        height: 79%; } }
+  .outer-chat .messageForm {
+    height: 20%; }
+    @media (min-width: 40.063em) {
+      .outer-chat .messageForm {
+        height: 10%; } }
   .outer-chat .messageForm, .outer-chat .groupForm {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%; }
+    .outer-chat .messageForm textarea, .outer-chat .groupForm textarea {
+      background: #E5F7FD;
+      border: none;
+      border-bottom: 1px solid #bababa;
+      box-shadow: none;
+      resize: none;
+      height: 100%;
+      margin-bottom: 0; }
+      .outer-chat .messageForm textarea:focus, .outer-chat .groupForm textarea:focus {
+        box-shadow: none; }
   .outer-chat .messages li .panel {
     border: 0;
-    border-radius: 4%; }
+    border-radius: 7px; }
     .outer-chat .messages li .panel.fromYou {
       background: #E5F7FD; }
     .outer-chat .messages li .panel.toYou {

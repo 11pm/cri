@@ -380,14 +380,17 @@ var cri = {
 
 	//send the message server
 	sendMessage: function(e){
-		
-		e.preventDefault();
 
 		//data we want to send
 		var sender = cri.user.username;
 		var receiver = $(this).find('.receiver').data("receiver");
 		var message = $(this).find('.message');
 		
+		//check if the message is empty
+		if(message.val().length < 0){
+			messages.addClass("error");
+		}
+
 		//Send message to server
 		webClient.send({type: "private", 
 			data: {
@@ -432,7 +435,13 @@ body.on('submit', '.loginForm', cri.loginClick);
 body.on('click', '.friend', cri.clickFriend);
 
 //Private message
-body.on('submit', '.messageForm', cri.sendMessage);
+body.on('keyup', '.messageForm', function(e){
+	//user pressed enter
+	console.log($(this))
+	if(e.which == 13){
+		cri.sendMessage($(this));
+	}
+});
 
 //sidebar menu
 body.on('click', '.options .side-nav li', cri.changeMenu);

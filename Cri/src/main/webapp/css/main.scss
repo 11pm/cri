@@ -36,18 +36,7 @@ input#send{
 	border-radius: none;
 }
 
-textarea{
-	border: none;
-	border-bottom:1px solid #bababa;
-	box-shadow: none;
-	background-color: #F7F7F7;
-	resize: none;
 
-	&:focus{
-		box-shadow: none;	
-	}
-
-}
 
 .left-sidebar, .right-sidebar {
 	height: 100%;
@@ -249,10 +238,29 @@ textarea{
 	h1{
 		color: $medium-grey;
 		margin-top: 0;
+
+		&.usernameTitle{
+			border-bottom: 1% solid #ccc;
+			height: 10%;
+		}
+	}
+
+	.parent{
+		height: 100%;
 	}
 
 	.message-area {
-		max-height: 80vh;
+		height: 69%;
+		overflow-y: scroll;
+		@media(min-width: $break-medium){
+			height: 79%;
+		}
+	}
+	.messageForm{
+		height: 20%;
+		@media(min-width: $break-medium){
+			height: 10%;
+		}
 	}
 
 	.messageForm, .groupForm{
@@ -261,6 +269,21 @@ textarea{
 		left: 0;
 		right: 0;
 		width: 100%;
+
+		textarea{
+			background: #E5F7FD;
+			border: none;
+			border-bottom:1px solid #bababa;
+			box-shadow: none;
+			resize: none;
+			height: 100%;
+			margin-bottom: 0;
+			&:focus{
+				box-shadow: none;	
+			}
+
+		}
+		
 	}
 
 	.messages{
@@ -269,7 +292,7 @@ textarea{
 			.panel{
 
 				border: 0;
-				border-radius: 4%;
+				border-radius: 7px;
 
 				&.fromYou{
 					background: $message-from;
