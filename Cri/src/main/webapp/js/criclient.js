@@ -78,9 +78,6 @@ var cri = {
 			case "group":
 				handler.groupmessage(response);
 				break;
-			default:
-				console.log(response)
-				break;
 		}
 
 	},
@@ -135,9 +132,11 @@ var cri = {
 
 		//show messages to user
 		messages.forEach(function(obj) {
-			console.log(obj)
 			$('.messages').append(cri.pmChatMessage(obj));
 		});
+
+		//create the canvas in the chat
+		cri.createImage(username, $('.profileImage'));
 
 	},
 
@@ -190,11 +189,16 @@ var cri = {
 		var messages = cri.getGroupChatMessages(data);
 		
 		var context = {
-			group: data,
-			messages: messages
+			group: data
 		};
 
 		cri.renderTemplate('group', $('.chat'), context);
+
+		//show messages to user
+		messages.forEach(function(obj) {
+			$('.messages').append(cri.groupChatMessage(obj));
+		});
+
 	},
 
 	notifyGroup: function(e){
@@ -280,7 +284,7 @@ var cri = {
 		var html = "<li>";
 		var you  = cri.user.username;
 
-		//if you send te
+		//if you send the message
 		if(msg.sender == you){
 			html += "<div class='panel fromYou small-8 columns small-push-1'>";	
 		}
@@ -300,15 +304,17 @@ var cri = {
 	},
 
 	groupChatMessage: function(msg){
-		var html = "<li>";
 		var you = cri.user.username;
+		var html = "<li><span class='timestamps'>[" + msg.timestamp + "]</span";
 
 		if(msg.sender == you){
-			html += "<div class='"
+			html += "<span class='username you'>" + msg.sender + ": </span>"; 
 		}
 		else{
-
+			html += "<span class='username other'>" + msg.sender + ": </span>";
 		}
+		html += "<span class='message'>" + msg.message + "</span>";
+		
 		return html;
 	},
 
@@ -385,7 +391,7 @@ var cri = {
 	
 		//add the messages
 		if(isOpen){
-			var chatMsg = cri.chatMessage(response);
+			var chatMsg = cri.groupChatMessage(response);
 			$(".messages").append(chatMsg);
 		}
 
@@ -436,6 +442,20 @@ var cri = {
 		});
 
 	},
+
+	//create a canvas picture with user letter
+	createImage: function(username, dom){
+
+		var dimensions = [50, 50]; //x,y
+		var letter 	   = username.charAt(0);
+
+		var canvas     = document.createElement('canvas');
+		canvas.width   = dimensions[0];
+		canvas.height  = dimensions[1];
+		
+
+		$(dom).html(canvas);
+	}
 
 };
 
