@@ -446,14 +446,23 @@ var cri = {
 	//create a canvas picture with user letter
 	createImage: function(username, dom){
 
-		var dimensions = [50, 50]; //x,y
+		var colors = ["red", "green", "blue"];
+
+		var dimensions = [50, 50]; //X,Y
+		var x = dimensions[0],
+		    y = dimensions[1];
 		var letter 	   = username.charAt(0);
 
 		var canvas     = document.createElement('canvas');
-		canvas.width   = dimensions[0];
-		canvas.height  = dimensions[1];
-		
+		canvas.width   = x;
+		canvas.height  = y;
 
+
+		//get a random color for bg
+		canvas.getContext("2d").font = "20px Open Sans";
+		canvas.getContext("2d").fillStyle = colors[Math.floor(Math.random()*colors.length)];
+		canvas.getContext("2d").fillRect(0,0,x,y);
+		canvas.getContext("2d").fillText(letter, 100, 80);
 		$(dom).html(canvas);
 	}
 
