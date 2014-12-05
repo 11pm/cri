@@ -1,15 +1,18 @@
-<h1>{{group}}</h1>
-<div class="message-area">
-	
-	<ul class="small-block-grid-1 messages"></ul>
+<div class="medium-8 large-6 columns medium-centered large-centered outer-chat">
+	<h1 class="usernameTitle">{{group}}</h1>
 
+	<div class="message-area">
+		
+		<ul class="small-block-grid-1 messages"></ul>
+
+	</div>
+
+	<form class="groupForm">
+		<input 
+		type="hidden" 
+		class="groupReceiver" 
+		data-group="{{group}}">
+		<textarea class="message small-10 columns"></textarea>
+		<input type="submit" class="button small-2 columns">
+	</form>
 </div>
-
-<form class="groupForm">
-	<input 
-	type="hidden" 
-	class="groupReceiver"
-	data-group="{{group}}">
-	<textarea class="message small-10 columns"></textarea>
-	<input type="submit" class="button radius small-2 columns" id="send" value="Send">
-</form>

@@ -402,7 +402,6 @@ var cri = {
 		
 		//check if the message is empty
 		if(message.val().length < 0){
-			messages.addClass("error");
 			return false;
 		}
 
