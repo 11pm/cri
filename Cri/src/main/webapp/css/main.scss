@@ -38,12 +38,15 @@ input#send{
 
 
 
-.left-sidebar, .right-sidebar {
+.right-sidebar {
 	height: 100%;
 }
 
 .left-sidebar {
 	padding: 0 !important;
+	@media(min-width: $break-medium){
+		height: 100%;
+	}
 }
 
 .content {
@@ -257,7 +260,6 @@ input#send{
 		margin-top: 0;
 
 		&.usernameTitle{
-			border-bottom: 1% solid #ccc;
 			height: 10%;
 		}
 	}
@@ -273,10 +275,7 @@ input#send{
 		}
 	}
 	.messageForm, .groupForm{
-		height: 20%;
-		@media(min-width: $break-medium){
-			height: 10%;
-		}
+		height: 10%;
 	}
 
 	.messageForm, .groupForm{

@@ -20,11 +20,14 @@ input#send {
   margin-top: 0px;
   border-radius: none; }
 
-.left-sidebar, .right-sidebar {
+.right-sidebar {
   height: 100%; }
 
 .left-sidebar {
   padding: 0 !important; }
+  @media (min-width: 40.063em) {
+    .left-sidebar {
+      height: 100%; } }
 
 .content {
   width: 100% !important;
@@ -165,7 +168,6 @@ input#send {
     color: #33363F;
     margin-top: 0; }
     .outer-chat h1.usernameTitle {
-      border-bottom: 1% solid #ccc;
       height: 10%; }
   .outer-chat .profileImage {
     margin-top: 0.5rem; }
@@ -175,10 +177,7 @@ input#send {
       .outer-chat .message-area {
         height: 79%; } }
   .outer-chat .messageForm, .outer-chat .groupForm {
-    height: 20%; }
-    @media (min-width: 40.063em) {
-      .outer-chat .messageForm, .outer-chat .groupForm {
-        height: 10%; } }
+    height: 10%; }
   .outer-chat .messageForm, .outer-chat .groupForm {
     position: absolute;
     bottom: 0;
