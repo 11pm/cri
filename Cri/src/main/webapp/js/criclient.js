@@ -120,6 +120,9 @@ var cri = {
 		//set the user
 		cri.onChat = username;
 		
+		//remove unread messages
+		cri.removePill(username);
+
 		//get chat message from the user
 		var messages = cri.getChatMessages(username);
 		
@@ -304,17 +307,25 @@ var cri = {
 	},
 
 	groupChatMessage: function(msg){
-		var you = cri.user.username;
 		var html = "<li>";
-
+		var you  = cri.user.username;
+		html += "<h5>" + msg.sender + "</h5>";
+		//if you send the message
 		if(msg.sender == you){
-			html += "<span class='username you'>" + msg.sender + ": </span>"; 
+			html += "<div class='panel fromYou small-8 columns small-push-1'>";	
 		}
 		else{
-			html += "<span class='username other'>" + msg.sender + ": </span>";
+			html += "<div class='panel toYou small-8 columns'>";
 		}
-		html += "<span class='message'>" + msg.message + "</span>";
-		
+
+		html += "<p>" + msg.message + "</p>"; 
+		html += "</div>";
+
+		html += "<div class='small-3 columns'>";
+		html += "<span class='timestamp'>" + msg.timestamp + "</span>";
+
+		html += "</div>";
+		html += "</li>";
 		return html;
 	},
 
@@ -354,8 +365,19 @@ var cri = {
 		}
 	},
 
-	//when user opens chat from somebody, we remove the messages
+	//when user opens chat from somebody, we remove the pill notification
 	removePill: function(username){
+
+		$('.side-nav.Contacts li').each(function(obj){
+			var loopUser = $(this).data("username");
+			
+			//if the pill is from the user, remove it
+			if(loopUser == username){
+				var pill = $(this).find(".pill");
+				pill.html("");
+				pill.hide();
+			}
+		});
 
 	},
 
@@ -448,7 +470,7 @@ var cri = {
 		var message = $(this).find('.message');
 		
 		//check if the message is empty
-		if(message.val().length <= 0){
+		if(message.val().length === 0){
 			return false;
 		}
 
