@@ -309,7 +309,7 @@ var cri = {
 	groupChatMessage: function(msg){
 		var html = "<li>";
 		var you  = cri.user.username;
-		html += "<h5>" + msg.sender + "</h5>";
+		
 		//if you send the message
 		if(msg.sender == you){
 			html += "<div class='panel fromYou small-8 columns small-push-1'>";	
@@ -317,7 +317,7 @@ var cri = {
 		else{
 			html += "<div class='panel toYou small-8 columns'>";
 		}
-
+		html += "<h5>" + msg.sender + "</h5>";
 		html += "<p>" + msg.message + "</p>"; 
 		html += "</div>";
 

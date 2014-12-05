@@ -211,6 +211,10 @@ input#send {
       background: #B1F6CB; }
     .outer-chat .messages li .panel.toYou {
       background: #C7EDFC; }
+  .outer-chat .messages .timestamp {
+    color: #A6C0D7;
+    float: right;
+    font-weight: 400; }
 
 .size-12 {
   font-size: 12px; }
