@@ -255,7 +255,7 @@ input#send{
 			height: 79%;
 		}
 	}
-	.messageForm{
+	.messageForm, .groupForm{
 		height: 20%;
 		@media(min-width: $break-medium){
 			height: 10%;

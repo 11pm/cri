@@ -166,10 +166,10 @@ input#send {
     @media (min-width: 40.063em) {
       .outer-chat .message-area {
         height: 79%; } }
-  .outer-chat .messageForm {
+  .outer-chat .messageForm, .outer-chat .groupForm {
     height: 20%; }
     @media (min-width: 40.063em) {
-      .outer-chat .messageForm {
+      .outer-chat .messageForm, .outer-chat .groupForm {
         height: 10%; } }
   .outer-chat .messageForm, .outer-chat .groupForm {
     position: absolute;
