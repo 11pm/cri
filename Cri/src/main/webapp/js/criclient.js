@@ -111,7 +111,6 @@ var cri = {
 
 		//if we call from notification
 		if(arguments[1]){
-			console.log(arguments)
 			username = arguments[1];
 			//focus the window when we click the notification
 			window.focus();
@@ -129,14 +128,20 @@ var cri = {
 		
 		//create context for template
 		var context = {
-			user: username,
-			messages: messages
+			user: username
 		};
 
 		cri.renderTemplate('chat', $('.chat'), context);
 
+		//show messages to user
+		messages.forEach(function(obj) {
+			console.log(obj)
+			$('.messages').append(cri.chatMessage(obj));
+		});
+
 	},
 
+	//do something when user clicks the notification
 	notifypm: function(e){
 		var notification = $(this)[0];
 		//open a chat window with the user you click from the notification
@@ -145,9 +150,9 @@ var cri = {
 		notification.close();
 	},
 
-	//Shows notification
+	//Shows pm notification
 	showpmNotification: function(response){
-		console.log(response)
+		
 		cri.notification = new Notification(response.sender, {
 			body: response.message
 		});	
@@ -177,10 +182,6 @@ var cri = {
 			//get the group of clicked user from dataset
 			data = $(this).data("name");
 		}
-
-		// //get dataset from the group
-		// var data = $(this).data();
-		console.log(data)
 
 		//set the current chat
 		cri.onChat = data;
@@ -260,6 +261,7 @@ var cri = {
 			url: templateName(name),
 			type: "GET",
 			cache: false,
+			async: false,
 			success: function(html){
 				var template = Handlebars.compile(html);
 

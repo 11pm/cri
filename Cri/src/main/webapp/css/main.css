@@ -56,7 +56,7 @@ textarea {
   height: 100vh; }
 
 .profile {
-  background-color: #282c35;
+  background-color: #282C35;
   height: 8%;
   width: 100%;
   padding: 10px;
@@ -151,11 +151,11 @@ textarea {
   .login h1 {
     color: white; }
   .login .panel {
-    background: #33363f;
+    background: #33363F;
     border-radius: 1px; }
   .login .button {
-    color: #33363f;
-    background: #00bb8e; }
+    color: #33363F;
+    background: #00BB8E; }
     .login .button:hover {
       background: #00a27b;
       color: #2F323B; }
@@ -170,7 +170,7 @@ textarea {
   background: white;
   height: 100%; }
   .outer-chat h1 {
-    color: #33363f;
+    color: #33363F;
     margin-top: 0; }
   .outer-chat .message-area {
     max-height: 80vh; }
@@ -210,3 +210,5 @@ textarea {
 
 .size-72 {
   font-size: 72px; }
+
+/*# sourceMappingURL=main.css.map */
