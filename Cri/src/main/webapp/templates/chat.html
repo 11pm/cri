@@ -1,26 +1,28 @@
-<h1 class="usernameTitle">{{user}}</h1>
-<div class="message-area">
-	
-	<ul class="small-block-grid-1 messages">
-		{{#each messages}}
-			<li>
+<div class="medium-8 large-6 columns medium-centered large-centered outer-chat">
+	<h1 class="usernameTitle">{{user}}</h1>
+	<div class="message-area">
+		
+		<ul class="small-block-grid-1 messages">
+			{{#each messages}}
+				<li>
 
-				<div class="panel userMessage">
-					<h3>{{this.sender}} - <span class="subheader">{{this.timestamp}}</span></h3>
-					<hr>
-					<p>{{this.message}}</p>
-				</div>
-			</li>
-		{{/each}}
-	</ul>
+					<div class="panel userMessage">
+						<h3>{{this.sender}} - <span class="subheader">{{this.timestamp}}</span></h3>
+						<hr>
+						<p>{{this.message}}</p>
+					</div>
+				</li>
+			{{/each}}
+		</ul>
 
+	</div>
+
+	<form class="messageForm">
+		<input 
+		type="hidden" 
+		class="receiver" 
+		data-receiver="{{user}}">
+		<textarea class="message"></textarea>
+		<input type="submit" class="button radius" id="send" value="Send">
+	</form>
 </div>
-
-<form class="messageForm">
-	<input 
-	type="hidden" 
-	class="receiver" 
-	data-receiver="{{user}}">
-	<textarea class="message"></textarea>
-	<input type="submit" class="button radius" id="send" value="Send">
-</form>

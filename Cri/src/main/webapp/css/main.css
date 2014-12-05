@@ -164,15 +164,21 @@ textarea {
   height: 100vh; }
 
 .chat {
-  background: rgba(255, 255, 255, 0.8); }
-  .chat h1 {
+  height: 100%; }
+
+.outer-chat {
+  background: white;
+  height: 100%; }
+  .outer-chat h1 {
     color: #33363f;
     margin-top: 0; }
-  .chat .message-area {
+  .outer-chat .message-area {
     max-height: 80vh; }
-  .chat .messageForm, .chat .groupForm {
-    position: relative;
+  .outer-chat .messageForm, .outer-chat .groupForm {
+    position: absolute;
     bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%; }
 
 .size-12 {
