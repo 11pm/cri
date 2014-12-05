@@ -28,22 +28,11 @@ var handler = {
 	//Handles PM's
 	message: function(response){
 		//notification stuff
-		function showNotification(){
-			cri.notification = new Notification(response.sender, {
-				body: response.message
-			});	
-			
-			//create notification evt listener dynamicly
-			cri.notification.onclick = cri.notify;
-
-			//play audio
-			$('.notification-sound')[0].play();
-
-		}
+		// cri.showNotification(response);
 
 		//if if its not you and the chat window is not open
 		if (response.sender != cri.onChat && response.sender != cri.user.username){
-			showNotification();
+			cri.showpmNotification(response);
 		}
 
 
@@ -55,6 +44,15 @@ var handler = {
 
 	//Handles group messages
 	groupmessage: function(response){
+
+		//notification stuff
+		// cri.showGroupNotification(response);
+
+		//if if its not you and the chat window is not open
+		if (response.group != cri.onChat && response.sender != cri.user.username){
+			cri.showGroupNotification(response);
+		}
+
 		cri.chat.group.push(response);
 		//process the group message
 		cri.appendGroupChatMessage(response);

@@ -133,14 +133,14 @@ class Database{
         
     }
     
-    public Boolean inGroup(String userID, String groupID){
+    public Boolean inGroup(String userID, String groupname){
       
         try {
             String query = "CALL inGroup(?, ?)";
             
             prepSt = con.prepareStatement(query);
             prepSt.setString(1, userID);
-            prepSt.setString(2, groupID);
+            prepSt.setString(2, groupname);
             rs = prepSt.executeQuery();
             
             

@@ -42,7 +42,7 @@ INSERT INTO groups(groupname) VALUES ("The best call ever");
 
 INSERT INTO group_users (userID, groupID) VALUES (1, 1);
 INSERT INTO group_users (userID, groupID) VALUES (2, 1);
-
+INSERT INTO group_users (userID, groupID) VALUES (3, 1);
 -- get user details
 delimiter $$
 DROP procedure if exists login $$
@@ -116,12 +116,12 @@ delimiter ;
 delimiter $$
 drop procedure if exists inGroup $$
 
-create procedure inGroup(_userID varchar(1), _groupID varchar(1))
+create procedure inGroup(_userID varchar(1), _groupname varchar(255))
 begin
 	SELECT * from users
 	INNER JOIN group_users
 	ON users.id = group_users.userID
 	INNER JOIN groups
 	ON group_users.groupID = groups.id
-	WHERE users.id = _userID AND groups.id = _groupID;
+	WHERE users.id = _userID AND groups.groupname = _groupname;
 end $$

@@ -31,6 +31,7 @@ var cri = {
 		group: []
 	},
 
+	// notification event listeners
 	notification: null,
 
 	init: function(){
@@ -110,6 +111,7 @@ var cri = {
 
 		//if we call from notification
 		if(arguments[1]){
+			console.log(arguments)
 			username = arguments[1];
 			//focus the window when we click the notification
 			window.focus();
@@ -135,23 +137,56 @@ var cri = {
 
 	},
 
-	notify: function(e){
+	notifypm: function(e){
 		var notification = $(this)[0];
 		//open a chat window with the user you click from the notification
 		cri.clickFriend(e, notification.title);
+
+		notification.close();
+	},
+
+	//Shows notification
+	showpmNotification: function(response){
+		console.log(response)
+		cri.notification = new Notification(response.sender, {
+			body: response.message
+		});	
+		
+		//create notification evt listener dynamicly
+		cri.notification.onclick = cri.notifypm;
+
+		//play audio
+		$('.notification-sound')[0].play();
+
 	},
 
 	//when a client clicks a group, open it 
 	clickGroup: function(e){
 		e.preventDefault();
-		//get dataset from the group
-		var data = $(this).data();
+
+		var data;
+		// console.log(arguments)
+		//if we call from notification
+		if(arguments[1]){
+			console.log(arguments);
+			data = arguments[1];
+			//focus the window when we click the notification
+			window.focus();
+		}
+		else{
+			//get the group of clicked user from dataset
+			data = $(this).data("name");
+		}
+
+		// //get dataset from the group
+		// var data = $(this).data();
+		console.log(data)
 
 		//set the current chat
-		cri.onChat = data.name;
+		cri.onChat = data;
 
 		//get the messages from the history
-		var messages = cri.getGroupChatMessages(data.name);
+		var messages = cri.getGroupChatMessages(data);
 		
 		var context = {
 			group: data,
@@ -159,6 +194,34 @@ var cri = {
 		};
 
 		cri.renderTemplate('group', $('.chat'), context);
+	},
+
+	notifyGroup: function(e){
+		var notification = $(this)[0];
+
+		console.log(notification);
+		var groupNotification = {
+			name: notification.title
+		};
+
+		//open a chat window with the user you click from the notification
+		cri.clickGroup(e, notification.title);
+	},
+
+	//Shows notification
+	showGroupNotification: function(response){
+		console.log(response);
+		cri.notification = new Notification(response.group, {
+			body: response.message
+		});	
+		
+		// console.log(noti)
+		//create notification evt listener dynamicly
+		cri.notification.onclick = cri.notifyGroup;
+
+		//play audio
+		$('.notification-sound')[0].play();
+
 	},
 
 	//change menu items
@@ -259,7 +322,7 @@ var cri = {
 		cri.chat.group.forEach(function(obj, index) {
 			
 			//if the group chat window is the correct group || the group is the certain group
-			var receiver = obj.group.group == cri.onChat || obj.group.group == from;
+			var receiver = obj.group == cri.onChat || obj.group == from;
 			
 			//if it went through the filter
 			if(receiver){
@@ -293,7 +356,7 @@ var cri = {
 		var you = cri.user.username;
 
 		//if the correct group is open
-		var isOpen = response.group.group == cri.onChat;
+		var isOpen = response.group == cri.onChat;
 	
 		//add the messages
 		if(isOpen){
@@ -331,9 +394,9 @@ var cri = {
 
 		//data we want to send
 		var sender  = cri.user.username;
-		var group   = $(this).find('.groupReceiver').data();
+		var group   = $(this).find('.groupReceiver').data("group");
 		var message = $(this).find('.message');
-		
+		console.log("group")
 		//send a group messages to the server, the server send to the correct users
 		webClient.send({type: "groupmessage", 
 			data: {

@@ -121,7 +121,7 @@ public class User extends Database{
         
         try {
             //gets the data from the client
-            JSONObject group  = data.getJSONObject("group");
+            String group  = data.getString("group");
             String sender = data.getString("sender");
             String message = data.getString("message");
             
@@ -129,7 +129,7 @@ public class User extends Database{
             User receiver = (User) to.getUserProperties().get("user");
            
             //if the person to send to is in the group
-            if(this.isInGroup(receiver.data.get("id"), group.getString("id"))){
+            if(this.isInGroup(receiver.data.get("id"), group)){
                 String responseMessage = new JSONObject()
                     .put("type", "group")
                     .put("message", message)
