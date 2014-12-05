@@ -299,6 +299,19 @@ var cri = {
 		return html;
 	},
 
+	groupChatMessage: function(msg){
+		var html = "<li>";
+		var you = cri.user.username;
+
+		if(msg.sender == you){
+			html += "<div class='"
+		}
+		else{
+
+		}
+		return html;
+	},
+
 	//Get messages from history for a certain user
 	getChatMessages: function(from){
 		//the username of the logged in user
@@ -390,6 +403,7 @@ var cri = {
 		//check if the message is empty
 		if(message.val().length < 0){
 			messages.addClass("error");
+			return false;
 		}
 
 		//Send message to server
