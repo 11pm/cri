@@ -159,8 +159,8 @@ input#send {
     .outer-chat h1.usernameTitle {
       border-bottom: 1% solid #ccc;
       height: 10%; }
-  .outer-chat .parent {
-    height: 100%; }
+  .outer-chat .profileImage {
+    margin-top: 0.5rem; }
   .outer-chat .message-area {
     height: 69%; }
     @media (min-width: 40.063em) {

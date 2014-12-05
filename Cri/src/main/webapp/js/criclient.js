@@ -462,7 +462,7 @@ var cri = {
 		canvas.getContext("2d").font = "20px Open Sans";
 		canvas.getContext("2d").fillStyle = colors[Math.floor(Math.random()*colors.length)];
 		canvas.getContext("2d").fillRect(0,0,x,y);
-		canvas.getContext("2d").fillText(letter, 100, 80);
+		canvas.getContext("2d").fillText(letter, 0, 0);
 		$(dom).html(canvas);
 	}
 
