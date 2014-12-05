@@ -136,7 +136,7 @@ var cri = {
 		//show messages to user
 		messages.forEach(function(obj) {
 			console.log(obj)
-			$('.messages').append(cri.chatMessage(obj));
+			$('.messages').append(cri.pmChatMessage(obj));
 		});
 
 	},
@@ -275,16 +275,26 @@ var cri = {
 
 	},
 
-	//create a chat message to add to any chat window
-	chatMessage: function(msg){
+	//create a chat message to add to any pm window
+	pmChatMessage: function(msg){
 		var html = "<li>";
+		var you  = cri.user.username;
 
-		html += "<div class='panel'>";
-		html += "<h3>" + msg.sender + " - <span class='subheader'>" + msg.timestamp + "</span></h3>";
-		html += "<hr>";
-		html += "<p>" + msg.message + "</p>";
+		//if you send te
+		if(msg.sender == you){
+			html += "<div class='panel fromYou small-8 columns small-push-1'>";	
+		}
+		else{
+			html += "<div class='panel toYou small-8 columns'>";
+		}
+
+		html += "<p>" + msg.message + "</p>"; 
 		html += "</div>";
 
+		html += "<div class='small-3 columns'>";
+		html += "<span class='timestamp'>" + msg.timestamp + "</span>";
+
+		html += "</div>";
 		html += "</li>";
 		return html;
 	},
@@ -347,7 +357,7 @@ var cri = {
 
 		//if it passes filtering, add it to the chat window
 		if(sender && receiver){
-			var chatMsg = cri.chatMessage(response);
+			var chatMsg = cri.pmChatMessage(response);
 			$(".messages").append(chatMsg);
 		}
 
