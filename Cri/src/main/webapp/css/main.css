@@ -126,6 +126,14 @@ input#send {
       cursor: pointer; }
   .list .side-nav:not(:first-child) {
     display: none; }
+  .list .Contacts li .pill {
+    margin-right: 20%;
+    padding: 0.1em 1.1em;
+    border-radius: 4px;
+    float: right;
+    background: #00BB8E;
+    color: #282C35;
+    display: none; }
 
 .login {
   position: absolute;

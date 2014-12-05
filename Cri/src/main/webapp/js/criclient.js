@@ -337,7 +337,7 @@ var cri = {
 
 	//create the unread pill
 	createPill: function(dom){
-		
+		dom.fadeIn(400);
 		var totalUnread = dom.html();
 		//if there is no pill, create one with 1 as value
 		if(totalUnread.length === 0){
@@ -350,8 +350,13 @@ var cri = {
 			//increment by one
 			newNumber+=1;
 			//display the new number
-			dom.html(newNumber);
+			dom.html(newNumber).fadeIn(300);
 		}
+	},
+
+	//when user opens chat from somebody, we remove the messages
+	removePill: function(username){
+
 	},
 
 	//Get messages from history for a certain user
@@ -413,7 +418,7 @@ var cri = {
 		//if it passes filtering, add it to the chat window
 		if(sender && receiver){
 			var chatMsg = cri.pmChatMessage(response);
-			$(".messages").append(chatMsg);
+			$(".messages").append(chatMsg).fadeIn(400);
 		}
 
 	},
@@ -443,7 +448,7 @@ var cri = {
 		var message = $(this).find('.message');
 		
 		//check if the message is empty
-		if(message.val().length < 0){
+		if(message.val().length <= 0){
 			return false;
 		}
 

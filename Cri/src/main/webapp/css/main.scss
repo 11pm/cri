@@ -188,8 +188,25 @@ input#send{
 			display: none;
 		}
 
+
+		
 	}
 
+	.Contacts{
+			
+			li{
+				.pill{
+					margin-right: 20%;
+					padding: 0.1em 1.1em;
+					border-radius: 4px;
+					float: right;
+					background: $green;
+					color: $dark-grey;
+					display: none;
+				}
+			}
+
+		}
 
 }
 
