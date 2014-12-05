@@ -322,12 +322,21 @@ var cri = {
 		var unreadFromUser = cri.getChatMessages(response.sender);
 
 		//find the person in the sidebar 
-		$('.side-bar.Contacts > li').each(function(obj){
-			console.log($(this))
+		$('.side-nav.Contacts li').each(function(obj){
 			var username = $(this).data("username");
-			console.log(username == response.sender)
+			var unread = response.sender == username;
+			
+			cri.createPill($(this));
 		});
 
+	},
+
+	//create the unread pill
+	createPill: function(dom){
+		console.log(dom)
+		//if there is no pill, create one with 1 as value
+
+		//if there is a pill, increment it by one
 	},
 
 	//Get messages from history for a certain user
