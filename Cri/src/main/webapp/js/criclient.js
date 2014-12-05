@@ -451,17 +451,19 @@ var cri = {
 		var dimensions = [50, 50]; //X,Y
 		var x = dimensions[0],
 		    y = dimensions[1];
-		var letter 	   = username.charAt(0);
+		var letter 	   = username.charAt(0).toUpperCase();
 
 		var canvas     = document.createElement('canvas');
 		canvas.width   = x;
 		canvas.height  = y;
 
-
+		console.log(letter)
 		//get a random color for bg
 		canvas.getContext("2d").font = "20px Open Sans";
 		canvas.getContext("2d").fillStyle = colors[Math.floor(Math.random()*colors.length)];
 		canvas.getContext("2d").fillRect(0,0,x,y);
+		canvas.getContext("2d").fillStyle = "white";
+
 		canvas.getContext("2d").fillText(letter, 0, 0);
 		$(dom).html(canvas);
 	}
