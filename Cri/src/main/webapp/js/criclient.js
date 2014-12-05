@@ -305,7 +305,7 @@ var cri = {
 
 	groupChatMessage: function(msg){
 		var you = cri.user.username;
-		var html = "<li><span class='timestamps'>[" + msg.timestamp + "]</span";
+		var html = "<li>";
 
 		if(msg.sender == you){
 			html += "<span class='username you'>" + msg.sender + ": </span>"; 
@@ -316,6 +316,18 @@ var cri = {
 		html += "<span class='message'>" + msg.message + "</span>";
 		
 		return html;
+	},
+
+	addUnreadPm: function(response){
+		var unreadFromUser = cri.getChatMessages(response.sender);
+
+		//find the person in the sidebar 
+		$('.side-bar.Contacts > li').each(function(obj){
+			console.log($(this))
+			var username = $(this).data("username");
+			console.log(username == response.sender)
+		});
+
 	},
 
 	//Get messages from history for a certain user
